@@ -1,5 +1,5 @@
 {
-  "name": "morethan-log",
+  "name": "blog",
   "version": "1.3.0",
   "license": "MIT",
   "repository": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NODE_OPTIONS=’--max-old-space-size=1024‘ next build",
     "start": "next start",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "lint": "next lint"
