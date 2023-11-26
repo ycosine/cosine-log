@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://0xcos.com
+Host: https://morethan-log.vercel.app
 
 # Sitemaps
-Sitemap: https://0xcos.com/sitemap.xml
+Sitemap: https://morethan-log.vercel.app/sitemap.xml
