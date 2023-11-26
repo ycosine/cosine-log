@@ -14,12 +14,28 @@ const tomorrow = new Date(current)
 tomorrow.setDate(tomorrow.getDate() + 1)
 tomorrow.setHours(0, 0, 0, 0)
 
+function shortHash(title: string) {
+  let hash = 0;
+  for (let i = 0; i < title.length; i++) {
+    hash = Math.imul(31, hash) + title.charCodeAt(i) | 0;
+  }
+  return Math.abs(hash).toString(16)
+}
+
 export function filterPosts(
   posts: TPosts,
   options: FilterPostsOptions = initialOption
 ) {
   const { acceptStatus = ["Public"], acceptType = ["Post"] } = options
   const filteredPosts = posts
+    .map((post) => {
+      const isNotSlug = !post.slug;
+      const hash = shortHash(post.title + ' ' + post.createdTime);
+      return {
+        ...post,
+        slug: isNotSlug ? hash : post.slug,
+      }
+    })
     // filter data
     .filter((post) => {
       const postDate = new Date(post?.date?.start_date || post.createdTime)

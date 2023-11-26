@@ -34,7 +34,6 @@ const ContactCard: React.FC = () => {
             <div className="name">email</div>
           </a>
         )}
-        xw
       </StyledWrapper>
     </>
   )
