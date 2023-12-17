@@ -12,8 +12,8 @@ RUN yarn install
 # 构建 Next.js 应用
 RUN yarn build
 
-# 暴露 3000 端口
-EXPOSE 3000
+# 暴露 9876 端口
+EXPOSE 9876
 
 # 运行 Next.js 应用
 CMD ["yarn", "start"]

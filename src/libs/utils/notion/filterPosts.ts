@@ -44,7 +44,7 @@ export function filterPosts(
     })
     // filter status
     .filter((post) => {
-      const postStatus = post.status[0]
+      const postStatus = post.status?.[0]
       return acceptStatus.includes(postStatus)
     })
     // filter type
