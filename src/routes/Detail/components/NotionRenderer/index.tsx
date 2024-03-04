@@ -6,13 +6,9 @@ import useScheme from "src/hooks/useScheme"
 
 // core styles shared by all of react-notion-x (required)
 import "react-notion-x/src/styles.css"
-
 // used for code syntax highlighting (optional)
 import "prismjs/themes/prism-tomorrow.css"
 
-// used for rendering equations (optional)
-
-import "katex/dist/katex.min.css"
 import { FC } from "react"
 import styled from "@emotion/styled"
 
@@ -65,20 +61,9 @@ const Collection = dynamic(() =>
     (m) => m.Collection
   )
 )
-const Equation = dynamic(() =>
-  import("react-notion-x/build/third-party/equation").then((m) => m.Equation)
-)
-const Pdf = dynamic(
-  () => import("react-notion-x/build/third-party/pdf").then((m) => m.Pdf),
-  {
-    ssr: false,
-  }
-)
-const Modal = dynamic(
-  () => import("react-notion-x/build/third-party/modal").then((m) => m.Modal),
-  {
-    ssr: false,
-  }
+const CallOut = dynamic(
+  () => import("src/components/CallOut").then((m) => m.CallOut),
+  { ssr: false }
 )
 
 const mapPageUrl = (id: string) => {
@@ -99,9 +84,7 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
         components={{
           Code,
           Collection,
-          Equation,
-          Modal,
-          Pdf,
+          Callout: CallOut,
           nextImage: Image,
           nextLink: Link,
         }}

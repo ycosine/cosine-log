@@ -2,7 +2,7 @@ const CONFIG = {
   // profile setting (required)
   profile: {
     name: "余贤俊",
-    image: "/avatar.svg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
+    image: "/avatar3.svg",
     role: "前端开发",
     bio: "写写代码.",
     email: "codecosine@gmail.com",
@@ -24,7 +24,7 @@ const CONFIG = {
 
   // notion configuration (required)
   notionConfig: {
-    pageId: 'f0dfe2de6ac84247a82ff209e67474fe',
+    pageId: "f0dfe2de6ac84247a82ff209e67474fe",
   },
 
   // plugin configuration (optional)

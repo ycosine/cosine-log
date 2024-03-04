@@ -1,7 +1,7 @@
 import { Global as _Global, css, useTheme } from "@emotion/react"
 
 import { ThemeProvider as _ThemeProvider } from "@emotion/react"
-import { pretendard } from "src/assets"
+import { lxgw } from "src/assets"
 
 export const Global = () => {
   const theme = useTheme()
@@ -9,14 +9,17 @@ export const Global = () => {
   return (
     <_Global
       styles={css`
+        :root {
+          --notion-font: ${lxgw.style.fontFamily};
+        }
         body {
           margin: 0;
           padding: 0;
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
-          font-family: ${pretendard.style.fontFamily};
-          font-weight: ${pretendard.style.fontWeight};
-          font-style: ${pretendard.style.fontStyle};
+          font-family: ${lxgw.style.fontFamily};
+          font-weight: ${lxgw.style.fontWeight};
+          font-style: ${lxgw.style.fontStyle};
         }
 
         * {
