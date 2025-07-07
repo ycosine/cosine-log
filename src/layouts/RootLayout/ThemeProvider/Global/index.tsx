@@ -1,7 +1,9 @@
 import { Global as _Global, css, useTheme } from "@emotion/react"
 
 import { ThemeProvider as _ThemeProvider } from "@emotion/react"
-import { lxgw } from "src/assets"
+import { Inter } from "next/font/google"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const Global = () => {
   const theme = useTheme()
@@ -10,16 +12,16 @@ export const Global = () => {
     <_Global
       styles={css`
         :root {
-          --notion-font: ${lxgw.style.fontFamily};
+          --notion-font: ${inter.style.fontFamily};
         }
         body {
           margin: 0;
           padding: 0;
           color: ${theme.colors.gray12};
           background-color: ${theme.colors.gray2};
-          font-family: ${lxgw.style.fontFamily};
-          font-weight: ${lxgw.style.fontWeight};
-          font-style: ${lxgw.style.fontStyle};
+          font-family: ${inter.style.fontFamily};
+          font-weight: ${inter.style.fontWeight};
+          font-style: ${inter.style.fontStyle};
         }
 
         * {
