@@ -1,6 +1,9 @@
+'use client'
+
 import styled from "@emotion/styled"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import React from "react"
+import { colors } from "src/styles"
 
 type Props = {
   children: string
@@ -30,7 +33,22 @@ const StyledWrapper = styled.div`
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors.gray10};
-  background-color: ${({ theme }) => theme.colors.gray5};
+  color: ${colors.light.text.secondary};
+  background-color: ${colors.light.background.secondary};
   cursor: pointer;
+  
+  [data-theme="dark"] & {
+    color: ${colors.dark.text.secondary};
+    background-color: ${colors.dark.background.secondary};
+  }
+  
+  &:hover {
+    background-color: ${colors.light.primary[100]};
+    color: ${colors.light.primary[700]};
+    
+    [data-theme="dark"] & {
+      background-color: ${colors.dark.primary[200]};
+      color: ${colors.dark.primary[800]};
+    }
+  }
 `

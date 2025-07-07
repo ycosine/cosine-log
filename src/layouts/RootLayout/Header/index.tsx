@@ -3,6 +3,7 @@ import Logo from "./Logo"
 import ThemeToggle from "./ThemeToggle"
 import styled from "@emotion/styled"
 import { zIndexes } from "src/styles/zIndexes"
+import { colors } from "src/styles"
 
 type Props = {
   fullWidth: boolean
@@ -28,8 +29,12 @@ const StyledWrapper = styled.div`
   z-index: ${zIndexes.header};
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.colors.gray2};
+  background-color: ${colors.light.background.primary};
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  
+  [data-theme="dark"] & {
+    background-color: ${colors.dark.background.primary};
+  }
 
   .container {
     display: flex;

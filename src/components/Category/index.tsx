@@ -1,4 +1,6 @@
-import { useRouter } from "next/router"
+'use client'
+
+import { useRouter } from "next/navigation"
 import React from "react"
 import { COLOR_SET } from "./constants"
 import styled from "@emotion/styled"
@@ -54,5 +56,5 @@ const StyledWrapper = styled.div`
   font-size: 0.875rem;
   line-height: 1.25rem;
   opacity: 0.9;
-  color: ${colors.dark.gray1};
+  color: ${colors.dark.text.primary};
 `

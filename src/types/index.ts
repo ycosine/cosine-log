@@ -1,6 +1,5 @@
 import { NextPage } from "next"
 import { AppProps } from "next/app"
-import { ExtendedRecordMap } from "notion-types"
 import { ReactElement, ReactNode } from "react"
 
 // TODO: refactor types
@@ -15,28 +14,32 @@ export type AppPropsWithLayout = AppProps & {
 export type TPostStatus = "Private" | "Public" | "PublicOnDetail"
 export type TPostType = "Post" | "Paper" | "Page"
 
+// New Markdown-based post type
 export type TPost = {
   id: string
-  date: { start_date: string }
-  type: TPostType[]
   slug: string
-  tags?: string[]
-  category?: string[]
-  summary?: string
-  author?: {
-    id: string
-    name: string
-    profile_photo?: string
-  }[]
   title: string
-  status: TPostStatus[]
+  date: { start_date: string }
+  tags: string[]
+  category: string[]
+  summary: string
+  author: string
+  cover?: string
+  content: string
+  htmlContent: string
+  excerpt: string
+  readingTime: number
   createdTime: string
+  updatedTime: string
+  type: TPostType[]
+  status: TPostStatus[]
   fullWidth: boolean
   thumbnail?: string
+  draft: boolean
 }
 
 export type PostDetail = TPost & {
-  recordMap: ExtendedRecordMap
+  htmlContent: string
 }
 
 export type TPosts = TPost[]
@@ -49,3 +52,6 @@ export type TCategories = {
 }
 
 export type ThemeType = "dark" | "light"
+
+// Re-export markdown types
+export type { Post, PostFrontmatter } from 'src/libs/markdown'

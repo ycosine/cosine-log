@@ -22,9 +22,19 @@ const CONFIG = {
   lang: "zh-CN", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES', 'ko-KR']
   ogImageGenerateURL: "https://og-image-korean.vercel.app", // The link to generate OG image, don't end with a slash
 
-  // notion configuration (required)
-  notionConfig: {
-    pageId: "f0dfe2de6ac84247a82ff209e67474fe",
+  // markdown configuration (required)
+  markdownConfig: {
+    postsDirectory: "content/posts",
+  },
+
+  // OSS configuration (optional)
+  ossConfig: {
+    enable: false, // 设置为 true 启用 OSS 图片上传
+    region: process.env.OSS_REGION || "",
+    accessKeyId: process.env.OSS_ACCESS_KEY_ID || "",
+    accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET || "",
+    bucket: process.env.OSS_BUCKET || "",
+    baseUrl: process.env.OSS_BASE_URL || "",
   },
 
   // plugin configuration (optional)

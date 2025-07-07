@@ -1,3 +1,5 @@
+'use client'
+
 import { ThemeProvider as _ThemeProvider } from "@emotion/react"
 import { Global } from "./Global"
 import { createTheme } from "src/styles"

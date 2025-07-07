@@ -1,3 +1,5 @@
+'use client'
+
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { getCookie, setCookie } from "cookies-next"
 import { useEffect } from "react"
@@ -34,3 +36,4 @@ const useScheme = (): [Scheme, SetScheme] => {
 }
 
 export default useScheme
+export { useScheme }

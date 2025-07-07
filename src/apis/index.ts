@@ -1,1 +1,1 @@
-export * from "./notion-client"
+export * from "./markdown-client"
