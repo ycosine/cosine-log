@@ -13,7 +13,7 @@ const useScheme = (): [Scheme, SetScheme] => {
 
   const { data } = useQuery({
     queryKey: queryKey.scheme(),
-    enabled: false,
+    queryFn: () => getCookie("scheme") || "light",
     initialData: "light",
   })
 

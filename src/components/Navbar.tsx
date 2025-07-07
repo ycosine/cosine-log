@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { HiMenu, HiX } from 'react-icons/hi'
-import ThemeToggle from './ThemeToggle'
+import Link from "next/link"
+import { useState } from "react"
+import { HiMenu, HiX } from "react-icons/hi"
+import ThemeToggle from "./ThemeToggle"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
-    { name: '首页', href: '/' },
-    { name: '关于', href: '/about' },
-    { name: '标签', href: '/tags' },
-    { name: '分类', href: '/categories' },
+    { name: "首页", href: "/" },
+    { name: "关于", href: "/about" },
+    { name: "标签", href: "/tags" },
+    { name: "分类", href: "/categories" },
   ]
 
   return (
@@ -20,8 +20,8 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="flex items-center space-x-2 text-xl font-bold text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">

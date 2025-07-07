@@ -1,7 +1,7 @@
 import './globals.css'
+import '../styles/typo-global.css'
 import QueryProvider from './providers/QueryProvider'
 import { ThemeProvider } from '@/contexts/ThemeContext'
-import Navbar from '@/components/Navbar'
 
 export const metadata = {
   title: 'Cosine 余弦是定理',
@@ -16,15 +16,22 @@ export default function AppLayout({
 }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className="min-h-screen bg-white dark:bg-gray-900 transition-colors">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" 
+          rel="stylesheet" 
+        />
+        <link 
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" 
+          rel="stylesheet" 
+        />
+      </head>
+      <body style={{ margin: 0, padding: 0 }}>
         <ThemeProvider>
           <QueryProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-1">
-                {children}
-              </main>
-            </div>
+            {children}
           </QueryProvider>
         </ThemeProvider>
       </body>

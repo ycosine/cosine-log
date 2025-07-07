@@ -38,7 +38,9 @@ export async function getFilteredPosts(params: {
   limit?: number
 }): Promise<PostsResponse> {
   try {
-    let posts = await getAllPosts()
+    // 获取基本数据
+    const response = await getPosts()
+    let posts = response.posts
     
     // 根据标签过滤
     if (params.tag) {
@@ -71,15 +73,10 @@ export async function getFilteredPosts(params: {
     const endIndex = startIndex + limit
     const paginatedPosts = posts.slice(startIndex, endIndex)
     
-    const [tags, categories] = await Promise.all([
-      getAllTags(),
-      getAllCategories()
-    ])
-    
     return {
       posts: paginatedPosts,
-      tags,
-      categories,
+      tags: response.tags,
+      categories: response.categories,
       total: posts.length
     }
   } catch (error) {

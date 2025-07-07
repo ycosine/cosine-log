@@ -1,6 +1,6 @@
 'use client'
 
-import ModernPostDetail from "./ModernPostDetail"
+import TypoPostDetail from "./TypoPostDetail"
 import type { Post } from "src/libs/markdown/types"
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Detail: React.FC<Props> = ({ post }) => {
-  return <ModernPostDetail post={post} />
+  return <TypoPostDetail post={post} />
 }
 
 export default Detail

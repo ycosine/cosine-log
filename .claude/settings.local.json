@@ -13,7 +13,13 @@
       "Bash(curl:*)",
       "Bash(lsof:*)",
       "Bash(npm run build:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:rankangkang.github.io)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(pnpm dev:*)",
+      "Bash(pkill:*)",
+      "Bash(wget:*)"
     ],
     "deny": []
   }

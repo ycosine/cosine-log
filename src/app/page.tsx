@@ -1,6 +1,6 @@
 
-import ModernFeed from 'src/routes/Feed/ModernFeed'
+import TypoFeed from 'src/routes/Feed/TypoFeed'
 
 export default function HomePage() {
-  return <ModernFeed />
+  return <TypoFeed />
 }
