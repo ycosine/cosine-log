@@ -5,6 +5,7 @@ import { remark } from 'remark'
 import remarkHtml from 'remark-html'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
+import { imageProcessor } from './imageProcessor'
 
 export interface PostFrontmatter {
   title: string
@@ -81,10 +82,13 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       return null
     }
 
+    // 处理图片链接
+    const { content: processedImageContent } = imageProcessor.processImages(content)
+    
     // 处理 Markdown 转 HTML
     const processedContent = await remark()
       .use(remarkHtml)
-      .process(content)
+      .process(processedImageContent)
     
     const htmlContent = processedContent.toString()
     
