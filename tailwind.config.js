@@ -151,7 +151,7 @@ module.exports = {
           'sans-serif',
         ],
         montserrat: [
-          '"Montserrat"',
+          'var(--font-montserrat)',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
@@ -161,7 +161,7 @@ module.exports = {
           'sans-serif',
         ],
         mono: [
-          '"JetBrains Mono"',
+          'var(--font-jetbrains-mono)',
           '"Fira Code"',
           'Consolas',
           '"Liberation Mono"',

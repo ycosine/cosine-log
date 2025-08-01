@@ -91,13 +91,36 @@
   /* 列表 */
   & ul {
     @apply my-4 pl-8;
+    list-style-type: disc;
+    list-style-position: outside;
   }
   & ol {
     @apply my-4 pl-8;
+    list-style-type: decimal;
+    list-style-position: outside;
   }
 
   & li {
     @apply my-2;
+  }
+  
+  /* 嵌套列表样式 */
+  & ul ul {
+    @apply my-2 ml-4;
+    list-style-type: circle;
+  }
+  
+  & ul ul ul {
+    list-style-type: square;
+  }
+  
+  & ol ol {
+    @apply my-2 ml-4;
+    list-style-type: lower-alpha;
+  }
+  
+  & ol ol ol {
+    list-style-type: lower-roman;
   }
 
   /* 引用块 */
@@ -112,7 +135,7 @@
   /* 代码块 */
   & pre {
     @apply my-6 p-4 bg-gray-50 dark:bg-gray-900 border border-border-primary-light dark:border-border-primary-dark rounded-lg overflow-x-auto;
-    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    font-family: var(--font-jetbrains-mono), Consolas, Monaco, monospace;
     font-size: 0.875rem;
     line-height: 1.5;
   }
@@ -124,7 +147,7 @@
   /* 行内代码 */
   & code {
     @apply px-1 py-0.5 bg-gray-100 dark:bg-gray-800 border border-border-primary-light dark:border-border-primary-dark rounded-sm;
-    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    font-family: var(--font-jetbrains-mono), Consolas, Monaco, monospace;
     font-size: 0.875em;
   }
 

@@ -4,7 +4,7 @@ const CONFIG = {
     name: "余贤俊",
     image: "/avatar3.svg",
     role: "前端开发",
-    bio: "让万物穿过",
+    bio: "让万物穿过自己",
     email: "codecosine@gmail.com",
     github: "ycosine",
     instagram: "",
@@ -12,7 +12,7 @@ const CONFIG = {
   projects: [],
   // blog setting (required)
   blog: {
-    title: "Cosine 余弦是定理",
+    title: "Cosine",
     description: "记录技术思考与生活感悟的数字空间",
   },
 
