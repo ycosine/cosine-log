@@ -117,15 +117,15 @@ const TypoPostDetail: React.FC<Props> = ({ post }) => {
 
 // Styled Components with Typo theme CSS variables
 const Container = styled.div`
-  --font-color: ${props => props.theme === 'dark' ? '#fff' : '#252525'};
-  --font-color-secondary: ${props => props.theme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
-  --font-color-extra: ${props => props.theme === 'dark' ? '#969696' : '#969696'};
-  --color-background: ${props => props.theme === 'dark' ? '#3b3e4a' : '#fff'};
-  --color-hr: ${props => props.theme === 'dark' ? '#585c69' : '#e8e8e8'};
-  --color-active: ${props => props.theme === 'dark' ? '#61AEEE' : '#4078F2'};
-  --color-unactive: ${props => props.theme === 'dark' ? '#969696' : '#969696'};
-  --color-list-item: ${props => props.theme === 'dark' ? '#4a4d59' : '#f7f7f7'};
-  --color-code-block: ${props => props.theme === 'dark' ? '#4a4d59' : '#f7f7f7'};
+  --font-color: ${props => props.theme.scheme === 'dark' ? '#fff' : '#252525'};
+  --font-color-secondary: ${props => props.theme.scheme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
+  --font-color-extra: ${props => props.theme.scheme === 'dark' ? '#969696' : '#969696'};
+  --color-background: ${props => props.theme.scheme === 'dark' ? '#3b3e4a' : '#fff'};
+  --color-hr: ${props => props.theme.scheme === 'dark' ? '#585c69' : '#e8e8e8'};
+  --color-active: ${props => props.theme.scheme === 'dark' ? '#61AEEE' : '#4078F2'};
+  --color-unactive: ${props => props.theme.scheme === 'dark' ? '#969696' : '#969696'};
+  --color-list-item: ${props => props.theme.scheme === 'dark' ? '#4a4d59' : '#f7f7f7'};
+  --color-code-block: ${props => props.theme.scheme === 'dark' ? '#4a4d59' : '#f7f7f7'};
   --main-width: 1080px;
 
   min-height: 100vh;

@@ -34,7 +34,7 @@ const Category: React.FC<Props> = ({ readOnly = false, children }) => {
   return (
     <StyledWrapper
       onClick={() => handleClick(children)}
-      css={{
+      style={{
         backgroundColor: getColorClassByName(children),
         cursor: readOnly ? "default" : "pointer",
       }}

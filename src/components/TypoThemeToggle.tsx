@@ -5,11 +5,15 @@ import { useScheme } from "src/hooks/useScheme"
 import { HiSun, HiMoon } from 'react-icons/hi'
 
 const TypoThemeToggle: React.FC = () => {
-  const [scheme, toggleScheme] = useScheme()
+  const [scheme, setScheme] = useScheme()
+
+  const handleToggle = () => {
+    setScheme(scheme === 'light' ? 'dark' : 'light')
+  }
 
   return (
     <ToggleButton 
-      onClick={toggleScheme}
+      onClick={handleToggle}
       aria-label={scheme === 'light' ? '切换到暗色模式' : '切换到亮色模式'}
       data-theme={scheme}
     >
@@ -19,10 +23,10 @@ const TypoThemeToggle: React.FC = () => {
 }
 
 const ToggleButton = styled.button`
-  --font-color: ${props => props.theme === 'dark' ? '#fff' : '#252525'};
-  --font-color-secondary: ${props => props.theme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
-  --color-active: ${props => props.theme === 'dark' ? '#61AEEE' : '#4078F2'};
-  --color-hr: ${props => props.theme === 'dark' ? '#585c69' : '#e8e8e8'};
+  --font-color: ${props => props.theme.scheme === 'dark' ? '#fff' : '#252525'};
+  --font-color-secondary: ${props => props.theme.scheme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
+  --color-active: ${props => props.theme.scheme === 'dark' ? '#61AEEE' : '#4078F2'};
+  --color-hr: ${props => props.theme.scheme === 'dark' ? '#585c69' : '#e8e8e8'};
 
   background: transparent;
   border: 1px solid var(--color-hr);

@@ -1,6 +1,4 @@
-import { blue, gray, grayDark } from "@radix-ui/colors"
-
-export type Colors = typeof colors.light & typeof colors.dark
+export type Colors = typeof colors.light
 
 export const colors = {
   light: {
@@ -44,18 +42,19 @@ export const colors = {
       900: "#7c2d12",
     },
     // 灰色系
-    gray: {
-      50: "#fafafa",
-      100: "#f5f5f5",
-      200: "#e5e5e5",
-      300: "#d4d4d4",
-      400: "#a3a3a3",
-      500: "#737373",
-      600: "#525252",
-      700: "#404040",
-      800: "#262626",
-      900: "#171717",
-    },
+    gray: "#737373",
+    gray1: "#fafafa",
+    gray2: "#f5f5f5",
+    gray3: "#eeeeee",
+    gray4: "#e5e5e5",
+    gray5: "#dddddd",
+    gray6: "#d4d4d4",
+    gray7: "#a3a3a3",
+    gray8: "#737373",
+    gray9: "#525252",
+    gray10: "#404040",
+    gray11: "#262626",
+    gray12: "#171717",
     // 背景色
     background: {
       primary: "#ffffff",
@@ -129,18 +128,19 @@ export const colors = {
       900: "#fef3c7",
     },
     // 灰色系
-    gray: {
-      50: "#0f0f0f",
-      100: "#1a1a1a",
-      200: "#262626",
-      300: "#404040",
-      400: "#525252",
-      500: "#737373",
-      600: "#a3a3a3",
-      700: "#d4d4d4",
-      800: "#e5e5e5",
-      900: "#fafafa",
-    },
+    gray: "#737373",
+    gray1: "#0f0f0f",
+    gray2: "#1a1a1a",
+    gray3: "#222222",
+    gray4: "#262626",
+    gray5: "#333333",
+    gray6: "#404040",
+    gray7: "#525252",
+    gray8: "#737373",
+    gray9: "#a3a3a3",
+    gray10: "#d4d4d4",
+    gray11: "#e5e5e5",
+    gray12: "#fafafa",
     // 背景色
     background: {
       primary: "#0f172a",

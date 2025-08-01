@@ -1,4 +1,3 @@
-import { storageService } from '../storage'
 import { CONFIG } from '../../../site.config.js'
 
 interface ImageProcessResult {
@@ -48,18 +47,10 @@ export class MarkdownImageProcessor {
    * 解析相对路径图片为绝对路径
    */
   private resolveImagePath(src: string): string {
-    // 如果配置了存储服务，使用存储服务的公共URL
-    if (storageService.isEnabled()) {
-      const config = storageService.getConfig()
-      if (config.type === 'r2' && config.r2.publicUrl) {
-        // 假设图片存储在 images/ 目录下
-        const cleanSrc = src.replace(/^\.\//, '').replace(/^\.\.\//, '')
-        return `${config.r2.publicUrl}/images/${cleanSrc}`
-      }
-      if (config.type === 'oss' && config.oss.baseUrl) {
-        const cleanSrc = src.replace(/^\.\//, '').replace(/^\.\.\//, '')
-        return `${config.oss.baseUrl}/images/${cleanSrc}`
-      }
+    // 如果配置了OSS，使用OSS的URL
+    if (CONFIG.storageConfig?.enable && CONFIG.storageConfig?.type === 'oss' && CONFIG.storageConfig?.oss?.baseUrl) {
+      const cleanSrc = src.replace(/^\.\//, '').replace(/^\.\.\//, '')
+      return `${CONFIG.storageConfig.oss.baseUrl}/images/${cleanSrc}`
     }
 
     // 回退到本地路径

@@ -1,26 +1,49 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import styled from "@emotion/styled"
-import usePostsQuery from "src/hooks/usePostsQuery"
-import { useTagsQuery } from "src/hooks/useTagsQuery"
-import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
 import { useScheme } from "src/hooks/useScheme"
 import { Post } from "src/libs/markdown/types"
 import { format } from "date-fns"
 import { zhCN } from "date-fns/locale"
 import Link from "next/link"
 import TypoThemeToggle from "src/components/TypoThemeToggle"
+import { DEFAULT_CATEGORY } from "src/constants"
+import { TCategories, TTags } from "src/types"
 
-const TypoFeed: React.FC = () => {
+type Props = {
+  posts: Post[]
+}
+
+const TypoFeed: React.FC<Props> = ({ posts }) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 10
   
-  const posts = usePostsQuery()
-  const { data: tags } = useTagsQuery()
-  const { data: categories } = useCategoriesQuery()
   const [scheme] = useScheme()
+  
+  // Calculate tags and categories from posts
+  const tags = useMemo(() => {
+    const tagCount: TTags = {}
+    posts.forEach(post => {
+      post.frontmatter.tags.forEach(tag => {
+        tagCount[tag] = (tagCount[tag] || 0) + 1
+      })
+    })
+    return tagCount
+  }, [posts])
+  
+  const categories = useMemo(() => {
+    const categoryCount: TCategories = {
+      [DEFAULT_CATEGORY]: posts.length,
+    }
+    posts.forEach(post => {
+      post.frontmatter.categories.forEach(category => {
+        categoryCount[category] = (categoryCount[category] || 0) + 1
+      })
+    })
+    return categoryCount
+  }, [posts])
 
   // 过滤文章
   const filteredPosts = posts.filter(post => {
@@ -149,15 +172,15 @@ const TypoFeed: React.FC = () => {
 
 // Styled Components with Typo theme CSS variables
 const Container = styled.div`
-  --font-color: ${props => props.theme === 'dark' ? '#fff' : '#252525'};
-  --font-color-secondary: ${props => props.theme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
-  --font-color-extra: ${props => props.theme === 'dark' ? '#969696' : '#969696'};
-  --color-background: ${props => props.theme === 'dark' ? '#3b3e4a' : '#fff'};
-  --color-hr: ${props => props.theme === 'dark' ? '#585c69' : '#e8e8e8'};
-  --color-active: ${props => props.theme === 'dark' ? '#61AEEE' : '#4078F2'};
-  --color-unactive: ${props => props.theme === 'dark' ? '#969696' : '#969696'};
-  --color-list-item: ${props => props.theme === 'dark' ? '#4a4d59' : '#f7f7f7'};
-  --color-code-block: ${props => props.theme === 'dark' ? '#4a4d59' : '#f7f7f7'};
+  --font-color: ${props => props.theme.scheme === 'dark' ? '#fff' : '#252525'};
+  --font-color-secondary: ${props => props.theme.scheme === 'dark' ? '#c9c9c9' : '#5A5A5A'};
+  --font-color-extra: ${props => props.theme.scheme === 'dark' ? '#969696' : '#969696'};
+  --color-background: ${props => props.theme.scheme === 'dark' ? '#3b3e4a' : '#fff'};
+  --color-hr: ${props => props.theme.scheme === 'dark' ? '#585c69' : '#e8e8e8'};
+  --color-active: ${props => props.theme.scheme === 'dark' ? '#61AEEE' : '#4078F2'};
+  --color-unactive: ${props => props.theme.scheme === 'dark' ? '#969696' : '#969696'};
+  --color-list-item: ${props => props.theme.scheme === 'dark' ? '#4a4d59' : '#f7f7f7'};
+  --color-code-block: ${props => props.theme.scheme === 'dark' ? '#4a4d59' : '#f7f7f7'};
   --main-width: 1080px;
 
   min-height: 100vh;

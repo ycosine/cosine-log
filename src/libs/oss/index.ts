@@ -88,7 +88,7 @@ export class OSSClient {
     }
 
     try {
-      const result = await this.client.list({ prefix })
+      const result = await this.client.list({ prefix } as any, {})
       return result.objects?.map(obj => obj.name) || []
     } catch (error) {
       console.error('OSS list error:', error)

@@ -5,7 +5,7 @@ import { getPost, getAllPostSlugs } from 'src/libs/markdown/server'
 import { CONFIG } from '../../../site.config'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 // 生成静态参数

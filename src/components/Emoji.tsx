@@ -13,7 +13,7 @@ type Props = {
 
 export const Emoji = ({ className, children }: Props) => {
   return (
-    <span className={className} css={[notoColorEmoji.style]}>
+    <span className={`${className || ''} ${notoColorEmoji.className}`}>
       {children}
     </span>
   )
