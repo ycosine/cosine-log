@@ -94,7 +94,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       {/* Header */}
       <header className="sticky top-0 bg-background-primary-light dark:bg-background-primary-dark border-b border-border-primary-light dark:border-border-primary-dark z-50 backdrop-blur-[10px]">
-        <nav className="max-w-[1080px] mx-auto px-8 py-6 flex justify-between items-center">
+        <nav className="max-width-main mx-auto px-8 py-6 flex justify-between items-center">
           <Link
             href="/"
             className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:-translate-x-0.5"
@@ -140,7 +140,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
                          border border-border-primary-light dark:border-border-primary-dark rounded-lg
                          text-text-primary-light dark:text-text-primary-dark text-base
                          transition-all duration-200 ease-in-out
-                         focus:outline-none focus:border-text-link-light dark:focus:border-text-link-dark
+                         focus:outline-hidden focus:border-text-link-light dark:focus:border-text-link-dark
                          placeholder:text-text-tertiary-light dark:placeholder:text-text-tertiary-dark"
             />
           </div>
@@ -226,7 +226,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
                                                    hover:bg-background-secondary-light dark:hover:bg-background-secondary-dark
                                                    hover:border-text-link-light dark:hover:border-text-link-dark"
                                       >
-                                        <div className="flex-shrink-0 text-sm text-text-tertiary-light dark:text-text-tertiary-dark font-medium">
+                                        <div className="shrink-0 text-sm text-text-tertiary-light dark:text-text-tertiary-dark font-medium">
                                           {format(
                                             new Date(post.frontmatter.date),
                                             "dd日"

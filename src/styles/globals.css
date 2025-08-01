@@ -1,6 +1,634 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@utility typo-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+@utility typo-transition-colors {
+  @apply transition-colors duration-500 ease-in-out;
+}
+
+@utility max-width-main {
+  max-width: 1080px;
+}
+
+@utility markdown-content {
+  @apply text-base leading-[1.75] text-text-primary-light dark:text-text-primary-dark;
+
+  /* 标题样式 */
+  & h1 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+  & h2 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+  & h3 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+  & h4 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+  & h5 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+  & h6 {
+    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
+  }
+
+  & h1 {
+    @apply text-3xl;
+  }
+  & h2 {
+    @apply text-2xl;
+  }
+  & h3 {
+    @apply text-xl;
+  }
+  & h4 {
+    @apply text-lg;
+  }
+  & h5 {
+    @apply text-base;
+  }
+  & h6 {
+    @apply text-base;
+  }
+
+  /* 段落 */
+  & p {
+    @apply mb-6;
+  }
+
+  /* 链接 */
+  & a {
+    @apply text-text-link-light dark:text-text-link-dark no-underline transition-colors duration-200 ease-in-out;
+  }
+
+  & a:hover {
+    @apply text-text-link-hover-light dark:text-text-link-hover-dark underline;
+  }
+
+  /* 列表 */
+  & ul {
+    @apply my-4 pl-8;
+  }
+  & ol {
+    @apply my-4 pl-8;
+  }
+
+  & li {
+    @apply my-2;
+  }
+
+  /* 引用块 */
+  & blockquote {
+    @apply my-6 py-4 px-6 border-l-4 border-primary-500 bg-background-secondary-light dark:bg-background-secondary-dark rounded-r-lg;
+  }
+
+  & blockquote p {
+    @apply m-0 text-text-secondary-light dark:text-text-secondary-dark;
+  }
+
+  /* 代码块 */
+  & pre {
+    @apply my-6 p-4 bg-gray-50 dark:bg-gray-900 border border-border-primary-light dark:border-border-primary-dark rounded-lg overflow-x-auto;
+    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  & pre code {
+    @apply bg-transparent p-0 border-none text-inherit;
+  }
+
+  /* 行内代码 */
+  & code {
+    @apply px-1 py-0.5 bg-gray-100 dark:bg-gray-800 border border-border-primary-light dark:border-border-primary-dark rounded-sm;
+    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+    font-size: 0.875em;
+  }
+
+  /* 表格 */
+  & table {
+    @apply w-full my-6 border-collapse overflow-hidden bg-background-primary-light dark:bg-background-primary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg;
+  }
+
+  & th {
+    @apply py-3 px-4 text-left border-b border-border-primary-light dark:border-border-primary-dark;
+  }
+
+  & td {
+    @apply py-3 px-4 text-left border-b border-border-primary-light dark:border-border-primary-dark;
+  }
+
+  & th {
+    @apply bg-background-secondary-light dark:bg-background-secondary-dark font-semibold;
+  }
+
+  & tr:last-child td {
+    @apply border-b-0;
+  }
+
+  /* 图片 */
+  & img {
+    @apply max-w-full h-auto my-6 mx-auto block rounded-lg overflow-hidden;
+  }
+  & .markdown-image-container {
+    @apply max-w-full h-auto my-6 mx-auto block rounded-lg overflow-hidden;
+  }
+
+  /* 水平线 */
+  & hr {
+    @apply my-8 border-none h-px bg-border-primary-light dark:bg-border-primary-dark;
+  }
+
+  /* Highlight.js 主题适配 - 亮色 */
+  & .hljs {
+    @apply block overflow-x-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300;
+  }
+
+  /* 亮色主题代码高亮 */
+  & .hljs-comment {
+    @apply text-gray-500 italic;
+  }
+  & .hljs-quote {
+    @apply text-gray-500 italic;
+  }
+
+  & .hljs-doctag {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  & .hljs-keyword {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  & .hljs-formula {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  & .hljs-section {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  & .hljs-name {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  & .hljs-selector-tag {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  & .hljs-deletion {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  & .hljs-subst {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  & .hljs-literal {
+    @apply text-cyan-600 dark:text-cyan-400;
+  }
+
+  & .hljs-string {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  & .hljs-regexp {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  & .hljs-addition {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  & .hljs-attribute {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  & .hljs-meta-string {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  & .hljs-built_in {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  & .hljs-class .hljs-title {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  & .hljs-attr {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-variable {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-template-variable {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-type {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-selector-class {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-selector-attr {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-selector-pseudo {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-number {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  & .hljs-symbol {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  & .hljs-bullet {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  & .hljs-link {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  & .hljs-meta {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  & .hljs-selector-id {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  & .hljs-title {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* Mermaid 图表样式 */
+  & .mermaid-diagram {
+    @apply my-6 text-center bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg p-4 overflow-x-auto;
+  }
+
+  & .mermaid-error {
+    @apply my-6 p-4 bg-red-50 dark:bg-red-900/10 border border-status-error rounded-lg;
+  }
+
+  & .mermaid-error pre {
+    @apply m-0 bg-transparent border-none text-status-error text-sm;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    @apply text-[0.9375rem];
+
+    & h1 {
+      @apply text-2xl;
+    }
+    & h2 {
+      @apply text-xl;
+    }
+    & h3 {
+      @apply text-lg;
+    }
+    & h4 {
+      @apply text-base;
+    }
+
+    & pre {
+      @apply -mx-4 rounded-none border-x-0;
+    }
+  }
+}
+
+@utility markdown-image-container {
+  .markdown-content & {
+    @apply max-w-full h-auto my-6 mx-auto block rounded-lg overflow-hidden;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs {
+  /* Highlight.js 主题适配 - 亮色 */
+  .markdown-content & {
+    @apply block overflow-x-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-comment {
+  /* 亮色主题代码高亮 */
+  .markdown-content & {
+    @apply text-gray-500 italic;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-quote {
+  .markdown-content & {
+    @apply text-gray-500 italic;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-doctag {
+  .markdown-content & {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-keyword {
+  .markdown-content & {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-formula {
+  .markdown-content & {
+    @apply text-purple-600 dark:text-purple-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-section {
+  .markdown-content & {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-name {
+  .markdown-content & {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-selector-tag {
+  .markdown-content & {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-deletion {
+  .markdown-content & {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-subst {
+  .markdown-content & {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-literal {
+  .markdown-content & {
+    @apply text-cyan-600 dark:text-cyan-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-string {
+  .markdown-content & {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-regexp {
+  .markdown-content & {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-addition {
+  .markdown-content & {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-attribute {
+  .markdown-content & {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-meta-string {
+  .markdown-content & {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-built_in {
+  .markdown-content & {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-class {
+  .markdown-content & .hljs-title {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-title {
+  .markdown-content .hljs-class & {
+    @apply text-yellow-600 dark:text-yellow-400;
+  }
+
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-attr {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-variable {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-template-variable {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-type {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-selector-class {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-selector-attr {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-selector-pseudo {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-number {
+  .markdown-content & {
+    @apply text-orange-600 dark:text-orange-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-symbol {
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-bullet {
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-link {
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-meta {
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility hljs-selector-id {
+  .markdown-content & {
+    @apply text-blue-600 dark:text-blue-400;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility mermaid-diagram {
+  /* Mermaid 图表样式 */
+  .markdown-content & {
+    @apply my-6 text-center bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg p-4 overflow-x-auto;
+  }
+
+  /* 响应式调整 */
+}
+
+@utility mermaid-error {
+  .markdown-content & {
+    @apply my-6 p-4 bg-red-50 dark:bg-red-900/10 border border-status-error rounded-lg;
+  }
+
+  .markdown-content & pre {
+    @apply m-0 bg-transparent border-none text-status-error text-sm;
+  }
+
+  /* 响应式调整 */
+}
 
 @layer base {
   :root {
@@ -54,220 +682,11 @@
   }
 
   textarea {
-    @apply border-none bg-transparent p-0 outline-none resize-none text-inherit;
+    @apply border-none bg-transparent p-0 outline-hidden resize-none text-inherit;
     font-family: inherit;
   }
 
   hr {
     @apply w-full border-none m-0 border-t border-gray-300 dark:border-gray-600;
-  }
-}
-
-@layer utilities {
-  .typo-transition {
-    @apply transition-all duration-300 ease-in-out;
-  }
-  
-  .typo-transition-colors {
-    @apply transition-colors duration-500 ease-in-out;
-  }
-
-  .max-width-main {
-    max-width: 1080px;
-  }
-}
-
-@layer components {
-  .markdown-content {
-    @apply text-base leading-[1.75] text-text-primary-light dark:text-text-primary-dark;
-  }
-
-  /* 标题样式 */
-  .markdown-content h1,
-  .markdown-content h2,
-  .markdown-content h3,
-  .markdown-content h4,
-  .markdown-content h5,
-  .markdown-content h6 {
-    @apply mt-8 mb-4 font-semibold leading-tight text-text-primary-light dark:text-text-primary-dark;
-  }
-
-  .markdown-content h1 { @apply text-3xl; }
-  .markdown-content h2 { @apply text-2xl; }
-  .markdown-content h3 { @apply text-xl; }
-  .markdown-content h4 { @apply text-lg; }
-  .markdown-content h5 { @apply text-base; }
-  .markdown-content h6 { @apply text-base; }
-
-  /* 段落 */
-  .markdown-content p {
-    @apply mb-6;
-  }
-
-  /* 链接 */
-  .markdown-content a {
-    @apply text-text-link-light dark:text-text-link-dark no-underline transition-colors duration-200 ease-in-out;
-  }
-
-  .markdown-content a:hover {
-    @apply text-text-linkHover-light dark:text-text-linkHover-dark underline;
-  }
-
-  /* 列表 */
-  .markdown-content ul,
-  .markdown-content ol {
-    @apply my-4 pl-8;
-  }
-
-  .markdown-content li {
-    @apply my-2;
-  }
-
-  /* 引用块 */
-  .markdown-content blockquote {
-    @apply my-6 py-4 px-6 border-l-4 border-primary-500 bg-background-secondary-light dark:bg-background-secondary-dark rounded-r-lg;
-  }
-
-  .markdown-content blockquote p {
-    @apply m-0 text-text-secondary-light dark:text-text-secondary-dark;
-  }
-
-  /* 代码块 */
-  .markdown-content pre {
-    @apply my-6 p-4 bg-gray-50 dark:bg-gray-900 border border-border-primary-light dark:border-border-primary-dark rounded-lg overflow-x-auto;
-    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
-    font-size: 0.875rem;
-    line-height: 1.5;
-  }
-
-  .markdown-content pre code {
-    @apply bg-transparent p-0 border-none text-inherit;
-  }
-
-  /* 行内代码 */
-  .markdown-content code {
-    @apply px-1 py-0.5 bg-gray-100 dark:bg-gray-800 border border-border-primary-light dark:border-border-primary-dark rounded;
-    font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
-    font-size: 0.875em;
-  }
-
-  /* 表格 */
-  .markdown-content table {
-    @apply w-full my-6 border-collapse overflow-hidden bg-background-primary-light dark:bg-background-primary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg;
-  }
-
-  .markdown-content th,
-  .markdown-content td {
-    @apply py-3 px-4 text-left border-b border-border-primary-light dark:border-border-primary-dark;
-  }
-
-  .markdown-content th {
-    @apply bg-background-secondary-light dark:bg-background-secondary-dark font-semibold;
-  }
-
-  .markdown-content tr:last-child td {
-    @apply border-b-0;
-  }
-
-  /* 图片 */
-  .markdown-content img,
-  .markdown-content .markdown-image-container {
-    @apply max-w-full h-auto my-6 mx-auto block rounded-lg overflow-hidden;
-  }
-
-  /* 水平线 */
-  .markdown-content hr {
-    @apply my-8 border-none h-px bg-border-primary-light dark:bg-border-primary-dark;
-  }
-
-  /* Highlight.js 主题适配 - 亮色 */
-  .markdown-content .hljs {
-    @apply block overflow-x-auto p-4 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-300;
-  }
-
-  /* 亮色主题代码高亮 */
-  .markdown-content .hljs-comment,
-  .markdown-content .hljs-quote {
-    @apply text-gray-500 italic;
-  }
-
-  .markdown-content .hljs-doctag,
-  .markdown-content .hljs-keyword,
-  .markdown-content .hljs-formula {
-    @apply text-purple-600 dark:text-purple-400;
-  }
-
-  .markdown-content .hljs-section,
-  .markdown-content .hljs-name,
-  .markdown-content .hljs-selector-tag,
-  .markdown-content .hljs-deletion,
-  .markdown-content .hljs-subst {
-    @apply text-red-600 dark:text-red-400;
-  }
-
-  .markdown-content .hljs-literal {
-    @apply text-cyan-600 dark:text-cyan-400;
-  }
-
-  .markdown-content .hljs-string,
-  .markdown-content .hljs-regexp,
-  .markdown-content .hljs-addition,
-  .markdown-content .hljs-attribute,
-  .markdown-content .hljs-meta-string {
-    @apply text-green-600 dark:text-green-400;
-  }
-
-  .markdown-content .hljs-built_in,
-  .markdown-content .hljs-class .hljs-title {
-    @apply text-yellow-600 dark:text-yellow-400;
-  }
-
-  .markdown-content .hljs-attr,
-  .markdown-content .hljs-variable,
-  .markdown-content .hljs-template-variable,
-  .markdown-content .hljs-type,
-  .markdown-content .hljs-selector-class,
-  .markdown-content .hljs-selector-attr,
-  .markdown-content .hljs-selector-pseudo,
-  .markdown-content .hljs-number {
-    @apply text-orange-600 dark:text-orange-400;
-  }
-
-  .markdown-content .hljs-symbol,
-  .markdown-content .hljs-bullet,
-  .markdown-content .hljs-link,
-  .markdown-content .hljs-meta,
-  .markdown-content .hljs-selector-id,
-  .markdown-content .hljs-title {
-    @apply text-blue-600 dark:text-blue-400;
-  }
-
-  /* Mermaid 图表样式 */
-  .markdown-content .mermaid-diagram {
-    @apply my-6 text-center bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg p-4 overflow-x-auto;
-  }
-  
-  .markdown-content .mermaid-error {
-    @apply my-6 p-4 bg-red-50 dark:bg-red-900/10 border border-status-error rounded-lg;
-  }
-  
-  .markdown-content .mermaid-error pre {
-    @apply m-0 bg-transparent border-none text-status-error text-sm;
-  }
-
-  /* 响应式调整 */
-  @media (max-width: 768px) {
-    .markdown-content {
-      @apply text-[0.9375rem];
-    }
-    
-    .markdown-content h1 { @apply text-2xl; }
-    .markdown-content h2 { @apply text-xl; }
-    .markdown-content h3 { @apply text-lg; }
-    .markdown-content h4 { @apply text-base; }
-    
-    .markdown-content pre {
-      @apply mx-[-1rem] rounded-none border-x-0;
-    }
   }
 }

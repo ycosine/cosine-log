@@ -18,7 +18,7 @@ const About: React.FC<Props> = ({ stats }) => {
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       {/* Header */}
       <header className="sticky top-0 bg-background-primary-light dark:bg-background-primary-dark border-b border-border-primary-light dark:border-border-primary-dark z-50 backdrop-blur-[10px]">
-        <nav className="max-w-[1080px] mx-auto px-8 py-6 flex justify-between items-center">
+        <nav className="max-width-main mx-auto px-8 py-6 flex justify-between items-center">
           <Link
             href="/"
             className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:-translate-x-0.5"
@@ -39,7 +39,7 @@ const About: React.FC<Props> = ({ stats }) => {
           
           {/* Profile Section */}
           <div className="flex items-center gap-8 mb-12 p-8 bg-background-secondary-light dark:bg-background-secondary-dark rounded-xl max-sm:flex-col max-sm:text-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <img 
                 src={CONFIG.profile.image} 
                 alt={CONFIG.profile.name}
