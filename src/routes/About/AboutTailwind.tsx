@@ -1,7 +1,15 @@
-'use client'
+"use client"
 
 import Link from "next/link"
-import { BiArrowBack, BiGlobe, BiEnvelope, BiLogoGithub, BiBookOpen, BiTag, BiFolder } from "react-icons/bi"
+import {
+  BiArrowBack,
+  BiGlobe,
+  BiEnvelope,
+  BiLogoGithub,
+  BiBookOpen,
+  BiTag,
+  BiFolder,
+} from "react-icons/bi"
 import ThemeToggle from "src/components/ThemeToggle"
 import { CONFIG } from "../../../site.config"
 
@@ -16,6 +24,9 @@ type Props = {
 const About: React.FC<Props> = ({ stats }) => {
   return (
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
+      {/* Top spacer to cover scroll content */}
+      <div className="fixed top-0 left-0 right-0 h-4 bg-background-primary-light dark:bg-background-primary-dark z-40"></div>
+
       {/* Header */}
       <header className="sticky top-4 bg-background-primary-light/80 dark:bg-background-primary-dark/80 backdrop-blur-[10px] z-50">
         <div className="max-width-main mx-auto px-8">
@@ -33,17 +44,17 @@ const About: React.FC<Props> = ({ stats }) => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-[800px] mx-auto px-8 py-12">
+      <main className="mx-auto px-8 py-12">
         <div className="animate-fade-in">
           <h1 className="text-[2.5rem] font-bold mb-12 text-center text-text-primary-light dark:text-text-primary-dark">
             关于本站
           </h1>
-          
+
           {/* Profile Section */}
           <div className="flex items-center gap-8 mb-12 p-8 bg-background-secondary-light dark:bg-background-secondary-dark rounded-xl max-sm:flex-col max-sm:text-center">
             <div className="shrink-0">
-              <img 
-                src={CONFIG.profile.image} 
+              <img
+                src={CONFIG.profile.image}
                 alt={CONFIG.profile.name}
                 className="w-[120px] h-[120px] rounded-full border-4 border-border-primary-light dark:border-border-primary-dark"
               />
@@ -109,7 +120,8 @@ const About: React.FC<Props> = ({ stats }) => {
                 在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。
               </p>
               <p className="leading-[1.8] text-text-secondary-light dark:text-text-secondary-dark mb-4">
-                博客使用 Next.js 15 构建，支持 Markdown 写作，代码高亮，以及 Mermaid 流程图。
+                博客使用 Next.js 15 构建，支持 Markdown 写作，代码高亮，以及
+                Mermaid 流程图。
                 所有文章都经过精心编写，力求为读者提供有价值的内容。
               </p>
             </section>
@@ -148,7 +160,7 @@ const About: React.FC<Props> = ({ stats }) => {
                 {CONFIG.profile.email && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
                     <BiEnvelope className="text-xl text-primary-600 dark:text-primary-400" />
-                    <a 
+                    <a
                       href={`mailto:${CONFIG.profile.email}`}
                       className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:underline"
                     >
@@ -159,7 +171,7 @@ const About: React.FC<Props> = ({ stats }) => {
                 {CONFIG.profile.github && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
                     <BiLogoGithub className="text-xl text-primary-600 dark:text-primary-400" />
-                    <a 
+                    <a
                       href={`https://github.com/${CONFIG.profile.github}`}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -172,7 +184,7 @@ const About: React.FC<Props> = ({ stats }) => {
                 {CONFIG.link && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
                     <BiGlobe className="text-xl text-primary-600 dark:text-primary-400" />
-                    <a 
+                    <a
                       href={CONFIG.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -189,7 +201,8 @@ const About: React.FC<Props> = ({ stats }) => {
           {/* Footer */}
           <footer className="text-center pt-8 border-t border-border-primary-light dark:border-border-primary-dark">
             <p className="text-text-tertiary-light dark:text-text-tertiary-dark text-sm">
-              © {CONFIG.since} - {new Date().getFullYear()} {CONFIG.profile.name}. All rights reserved.
+              © {CONFIG.since} - {new Date().getFullYear()}{" "}
+              {CONFIG.profile.name}. All rights reserved.
             </p>
           </footer>
         </div>

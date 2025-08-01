@@ -82,8 +82,8 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
           if (!mermaidCode.trim()) continue
           
           try {
-            // 生成唯一 ID
-            const graphId = `mermaid-graph-${Date.now()}-${i}`
+            // 生成唯一 ID - 使用索引而不是时间戳，避免 hydration 错误
+            const graphId = `mermaid-graph-${i}`
             
             // 创建一个新的 div 来渲染
             const renderDiv = document.createElement('div')

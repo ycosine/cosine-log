@@ -6,6 +6,7 @@ import { format } from "date-fns"
 import { zhCN } from "date-fns/locale"
 import Link from "next/link"
 import ThemeToggle from "src/components/ThemeToggle"
+import Footer from "src/components/Footer"
 import { TTags } from "src/types"
 import { CONFIG } from "../../../site.config"
 
@@ -47,6 +48,9 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
 
   return (
     <div className="min-h-screen bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font font-montserrat text-base leading-[1.75] tracking-[0.6px] typo-transition">
+      {/* Top spacer to cover scroll content */}
+      <div className="fixed top-0 left-0 right-0 h-4 bg-typo-light-background dark:bg-typo-dark-background z-40"></div>
+      
       {/* Header */}
       <header className="sticky top-4 bg-typo-light-background/80 dark:bg-typo-dark-background/80 backdrop-blur-[10px] z-50">
         <div className="max-width-main mx-auto px-[8vw]">
@@ -180,6 +184,8 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
           </div>
         )}
       </main>
+      
+      <Footer />
     </div>
   )
 }

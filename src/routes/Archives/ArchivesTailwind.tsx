@@ -93,6 +93,9 @@ const Archives: React.FC<Props> = ({ posts }) => {
 
   return (
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
+      {/* Top spacer to cover scroll content */}
+      <div className="fixed top-0 left-0 right-0 h-4 bg-background-primary-light dark:bg-background-primary-dark z-40"></div>
+      
       {/* Header */}
       <header className="sticky top-4 bg-background-primary-light/80 dark:bg-background-primary-dark/80 backdrop-blur-[10px] z-50">
         <div className="max-width-main mx-auto px-8">
