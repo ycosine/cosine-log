@@ -131,7 +131,7 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
       className="markdown-content prose prose-lg max-w-none
                  prose-headings:text-text-primary-light dark:prose-headings:text-text-primary-dark
                  prose-p:text-text-primary-light dark:prose-p:text-text-primary-dark
-                 prose-a:text-text-link-light dark:prose-a:text-text-link-dark
+                 prose-a:text-primary-600 dark:prose-a:text-primary-400
                  prose-a:no-underline hover:prose-a:underline
                  prose-strong:text-text-primary-light dark:prose-strong:text-text-primary-dark
                  prose-code:text-text-primary-light dark:prose-code:text-text-primary-dark

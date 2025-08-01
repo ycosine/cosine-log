@@ -5,7 +5,6 @@ export interface PostFrontmatter {
   categories: string[]
   description: string
   author: string
-  cover?: string
   draft: boolean
 }
 

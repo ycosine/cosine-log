@@ -6,8 +6,8 @@ import { format } from "date-fns"
 import { zhCN } from "date-fns/locale"
 import Link from "next/link"
 import ThemeToggle from "src/components/ThemeToggle"
-import { DEFAULT_CATEGORY } from "src/constants"
-import { TCategories, TTags } from "src/types"
+import { TTags } from "src/types"
+import { CONFIG } from "../../../site.config"
 
 type Props = {
   posts: Post[]
@@ -29,17 +29,6 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
     return tagCount
   }, [posts])
   
-  const categories = useMemo(() => {
-    const categoryCount: TCategories = {
-      [DEFAULT_CATEGORY]: posts.length,
-    }
-    posts.forEach(post => {
-      post.frontmatter.categories.forEach(category => {
-        categoryCount[category] = (categoryCount[category] || 0) + 1
-      })
-    })
-    return categoryCount
-  }, [posts])
 
   // 过滤文章
   const filteredPosts = posts.filter(post => {
@@ -59,30 +48,32 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
   return (
     <div className="min-h-screen bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font font-montserrat text-base leading-[1.75] tracking-[0.6px] typo-transition">
       {/* Header */}
-      <header className="sticky top-0 bg-typo-light-background dark:bg-typo-dark-background border-b border-typo-light-hr dark:border-typo-dark-hr z-50 backdrop-blur-[10px]">
-        <nav className="flex justify-between items-center max-width-main mx-auto px-[8vw] py-6 max-md:flex-col max-md:gap-4 max-md:py-4">
-          <Link 
-            href="/" 
-            className="text-2xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline typo-transition-colors hover:text-typo-light-active dark:hover:text-typo-dark-active"
-          >
-            Cosine 余弦是定理
-          </Link>
-          <div className="flex items-center gap-8 max-md:gap-6">
+      <header className="sticky top-4 bg-typo-light-background/80 dark:bg-typo-dark-background/80 backdrop-blur-[10px] z-50">
+        <div className="max-width-main mx-auto px-[8vw]">
+          <nav className="flex justify-between items-center py-6 border-b border-typo-light-hr dark:border-typo-dark-hr max-md:flex-col max-md:gap-4 max-md:py-4">
             <Link 
-              href="/archives" 
-              className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition-colors hover:text-typo-light-active dark:hover:text-typo-dark-active hover:underline"
+              href="/" 
+              className="text-2xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline typo-transition"
             >
-              归档
+              {CONFIG.blog.title}
             </Link>
-            <Link 
-              href="/about" 
-              className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition-colors hover:text-typo-light-active dark:hover:text-typo-dark-active hover:underline"
-            >
-              关于
-            </Link>
-            <ThemeToggle />
-          </div>
-        </nav>
+            <div className="flex items-center gap-8 max-md:gap-6">
+              <Link 
+                href="/archives" 
+                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
+              >
+                归档
+              </Link>
+              <Link 
+                href="/about" 
+                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
+              >
+                关于
+              </Link>
+              <ThemeToggle />
+            </div>
+          </nav>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -90,10 +81,10 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
         {/* Bio Section */}
         <section className="text-center mb-16 py-12">
           <h1 className="text-[32px] font-semibold m-0 mb-4 text-typo-light-font dark:text-typo-dark-font">
-            让万物穿过
+            {CONFIG.profile.bio}
           </h1>
           <p className="text-lg text-typo-light-font-secondary dark:text-typo-dark-font-secondary m-0 leading-relaxed">
-            记录技术思考与生活感悟的数字空间
+            {CONFIG.blog.description}
           </p>
         </section>
 
@@ -108,7 +99,7 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
                 setSearchQuery(e.target.value)
                 setCurrentPage(1)
               }}
-              className="w-full max-w-[400px] py-3 px-4 border border-typo-light-hr dark:border-typo-dark-hr rounded-lg bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font text-base typo-transition-colors placeholder:text-typo-light-font-extra dark:placeholder:text-typo-dark-font-extra focus:outline-hidden focus:border-typo-light-active dark:focus:border-typo-dark-active focus:shadow-[0_0_0_2px_rgba(64,120,242,0.1)] dark:focus:shadow-[0_0_0_2px_rgba(97,174,238,0.1)]"
+              className="w-full max-w-[400px] py-3 px-4 border border-typo-light-hr dark:border-typo-dark-hr rounded-lg bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font text-base typo-transition-colors placeholder:text-typo-light-font-extra dark:placeholder:text-typo-dark-font-extra focus:outline-hidden focus:border-typo-light-font dark:focus:border-typo-dark-font"
             />
           </section>
         )}
@@ -123,19 +114,14 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
           <div className="flex flex-col gap-12">
             {currentPosts.map((post) => (
             <article key={post.slug} className="pb-6 border-b border-dashed border-typo-light-hr dark:border-typo-dark-hr last:border-b-0">
-              <div className="flex justify-between items-center mb-3 max-md:flex-col max-md:items-start max-md:gap-1">
-                <time className="text-sm text-typo-light-font-extra dark:text-typo-dark-font-extra font-medium">
-                  {format(new Date(post.frontmatter.date), 'yyyy-MM-dd', { locale: zhCN })}
-                </time>
-                <span className="text-sm text-typo-light-active dark:text-typo-dark-active bg-typo-light-list-item dark:bg-typo-dark-list-item py-1 px-3 rounded-xl font-medium">
-                  {post.frontmatter.categories[0] || '未分类'}
-                </span>
-              </div>
+              <time className="block text-sm text-typo-light-font-extra dark:text-typo-dark-font-extra font-medium mb-3">
+                {format(new Date(post.frontmatter.date), 'yyyy-MM-dd', { locale: zhCN })}
+              </time>
               
               <h2 className="m-0 mb-4 text-2xl font-semibold leading-[1.4]">
                 <Link 
                   href={`/${post.slug}`} 
-                  className="text-typo-light-font dark:text-typo-dark-font no-underline typo-transition-colors hover:text-typo-light-active dark:hover:text-typo-dark-active"
+                  className="text-typo-light-font dark:text-typo-dark-font no-underline typo-transition hover:underline"
                 >
                   {post.frontmatter.title}
                 </Link>
@@ -145,20 +131,12 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
                 {post.excerpt}
               </p>
               
-              <div className="flex justify-between items-center max-md:flex-col max-md:items-start max-md:gap-4">
-                <div className="flex gap-2 flex-wrap">
-                  {post.frontmatter.tags.slice(0, 3).map(tag => (
-                    <span key={tag} className="text-xs text-typo-light-font-extra dark:text-typo-dark-font-extra bg-typo-light-list-item dark:bg-typo-dark-list-item py-[2px] px-2 rounded-lg before:content-['#']">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link 
-                  href={`/${post.slug}`} 
-                  className="text-typo-light-active dark:text-typo-dark-active no-underline text-sm font-medium typo-transition-colors hover:underline hover:translate-x-1"
-                >
-                  Read more →
-                </Link>
+              <div className="flex gap-2 flex-wrap">
+                {post.frontmatter.tags.slice(0, 3).map(tag => (
+                  <span key={tag} className="text-xs text-typo-light-font-extra dark:text-typo-dark-font-extra bg-typo-light-list-item dark:bg-typo-dark-list-item py-[2px] px-2 rounded-lg before:content-['#']">
+                    {tag}
+                  </span>
+                ))}
               </div>
             </article>
             ))}
@@ -171,7 +149,7 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
             {currentPage > 1 && (
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
-                className="bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr py-2 px-4 rounded-md cursor-pointer text-sm typo-transition-colors hover:bg-typo-light-active dark:hover:bg-typo-dark-active hover:text-white hover:border-typo-light-active dark:hover:border-typo-dark-active"
+                className="bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr py-2 px-4 rounded-md cursor-pointer text-sm typo-transition hover:bg-typo-light-hr dark:hover:bg-typo-dark-hr hover:text-typo-light-font dark:hover:text-typo-dark-font hover:border-typo-light-font dark:hover:border-typo-dark-font"
               >
                 ←
               </button>
@@ -183,8 +161,8 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
                 onClick={() => setCurrentPage(page)}
                 className={`py-2 px-4 rounded-md cursor-pointer text-sm typo-transition-colors ${
                   currentPage === page
-                    ? "bg-typo-light-active dark:bg-typo-dark-active text-white border border-typo-light-active dark:border-typo-dark-active"
-                    : "bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr hover:bg-typo-light-active dark:hover:bg-typo-dark-active hover:text-white hover:border-typo-light-active dark:hover:border-typo-dark-active"
+                    ? "bg-typo-light-font dark:bg-typo-dark-font text-typo-light-background dark:text-typo-dark-background border border-typo-light-font dark:border-typo-dark-font"
+                    : "bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr hover:bg-typo-light-hr dark:hover:bg-typo-dark-hr hover:text-typo-light-font dark:hover:text-typo-dark-font hover:border-typo-light-font dark:hover:border-typo-dark-font"
                 }`}
               >
                 {page}
@@ -194,7 +172,7 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
             {currentPage < totalPages && (
               <button
                 onClick={() => setCurrentPage(currentPage + 1)}
-                className="bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr py-2 px-4 rounded-md cursor-pointer text-sm typo-transition-colors hover:bg-typo-light-active dark:hover:bg-typo-dark-active hover:text-white hover:border-typo-light-active dark:hover:border-typo-dark-active"
+                className="bg-transparent text-typo-light-font-secondary dark:text-typo-dark-font-secondary border border-typo-light-hr dark:border-typo-dark-hr py-2 px-4 rounded-md cursor-pointer text-sm typo-transition hover:bg-typo-light-hr dark:hover:bg-typo-dark-hr hover:text-typo-light-font dark:hover:text-typo-dark-font hover:border-typo-light-font dark:hover:border-typo-dark-font"
               >
                 →
               </button>

@@ -10,17 +10,15 @@ export default async function AboutPage() {
   const posts = await getAllPosts()
   const totalPosts = posts.length
   const tags = new Set<string>()
-  const categories = new Set<string>()
   
   posts.forEach(post => {
     post.frontmatter.tags.forEach(tag => tags.add(tag))
-    post.frontmatter.categories.forEach(cat => categories.add(cat))
   })
   
   const stats = {
     totalPosts,
     totalTags: tags.size,
-    totalCategories: categories.size,
+    totalCategories: 0, // Keep for backward compatibility, will remove from About component later
   }
   
   return <About stats={stats} />

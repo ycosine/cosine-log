@@ -5,7 +5,6 @@ tags: ["markdown", "demo", "features"]
 categories: ["技术"]
 description: "展示博客支持的所有 Markdown 功能，包括代码高亮、图片、流程图等"
 author: "余贤俊"
-cover: "/images/markdown-demo.jpg"
 draft: false
 ---
 

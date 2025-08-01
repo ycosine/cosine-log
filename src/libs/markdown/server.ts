@@ -75,10 +75,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
         title: data.title,
         date: data.date,
         tags: data.tags || [],
-        categories: data.categories || [],
+        categories: [], // Deprecated, kept for backward compatibility
         description: data.description || '',
         author: data.author || '',
-        cover: data.cover || '',
         draft: data.draft || false
       },
       content,
@@ -124,16 +123,9 @@ export async function getAllTags(): Promise<string[]> {
   return Array.from(tags).sort()
 }
 
-// 获取所有分类
+// 获取所有分类 - Deprecated
 export async function getAllCategories(): Promise<string[]> {
-  const posts = await getAllPosts()
-  const categories = new Set<string>()
-  
-  posts.forEach(post => {
-    post.frontmatter.categories.forEach(category => categories.add(category))
-  })
-  
-  return Array.from(categories).sort()
+  return []
 }
 
 // 根据标签过滤文章
@@ -144,12 +136,9 @@ export async function getPostsByTag(tag: string): Promise<Post[]> {
   )
 }
 
-// 根据分类过滤文章
+// 根据分类过滤文章 - Deprecated
 export async function getPostsByCategory(category: string): Promise<Post[]> {
-  const posts = await getAllPosts()
-  return posts.filter(post => 
-    post.frontmatter.categories.includes(category)
-  )
+  return []
 }
 
 // 搜索文章

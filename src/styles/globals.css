@@ -81,11 +81,11 @@
 
   /* 链接 */
   & a {
-    @apply text-text-link-light dark:text-text-link-dark no-underline transition-colors duration-200 ease-in-out;
+    @apply text-primary-600 dark:text-primary-400 no-underline transition-colors duration-200 ease-in-out;
   }
 
   & a:hover {
-    @apply text-text-link-hover-light dark:text-text-link-hover-dark underline;
+    @apply text-primary-700 dark:text-primary-300 underline;
   }
 
   /* 列表 */
@@ -272,27 +272,27 @@
   }
 
   & .hljs-symbol {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   & .hljs-bullet {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   & .hljs-link {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   & .hljs-meta {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   & .hljs-selector-id {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   & .hljs-title {
-    @apply text-blue-600 dark:text-blue-400;
+    @apply text-gray-600 dark:text-gray-400;
   }
 
   /* Mermaid 图表样式 */

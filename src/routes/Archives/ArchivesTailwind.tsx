@@ -6,6 +6,7 @@ import { format } from "date-fns"
 import { BiArrowBack, BiTime, BiSearch } from "react-icons/bi"
 import ThemeToggle from "src/components/ThemeToggle"
 import type { Post } from "src/libs/markdown/types"
+import { CONFIG } from "../../../site.config"
 
 type Props = {
   posts: Post[]
@@ -93,17 +94,19 @@ const Archives: React.FC<Props> = ({ posts }) => {
   return (
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       {/* Header */}
-      <header className="sticky top-0 bg-background-primary-light dark:bg-background-primary-dark border-b border-border-primary-light dark:border-border-primary-dark z-50 backdrop-blur-[10px]">
-        <nav className="max-width-main mx-auto px-8 py-6 flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:-translate-x-0.5"
-          >
-            <BiArrowBack />
-            <span>返回首页</span>
-          </Link>
-          <ThemeToggle />
-        </nav>
+      <header className="sticky top-4 bg-background-primary-light/80 dark:bg-background-primary-dark/80 backdrop-blur-[10px] z-50">
+        <div className="max-width-main mx-auto px-8">
+          <nav className="flex justify-between items-center py-6 border-b border-border-primary-light dark:border-border-primary-dark">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:-translate-x-0.5"
+            >
+              <BiArrowBack />
+              <span>返回首页</span>
+            </Link>
+            <ThemeToggle />
+          </nav>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -140,7 +143,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
                          border border-border-primary-light dark:border-border-primary-dark rounded-lg
                          text-text-primary-light dark:text-text-primary-dark text-base
                          transition-all duration-200 ease-in-out
-                         focus:outline-hidden focus:border-text-link-light dark:focus:border-text-link-dark
+                         focus:outline-hidden focus:border-border-secondary-light dark:focus:border-border-secondary-dark
                          placeholder:text-text-tertiary-light dark:placeholder:text-text-tertiary-dark"
             />
           </div>
@@ -172,7 +175,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
                       <div className="flex items-baseline gap-4">
                         <h2 className="text-[1.75rem] font-bold text-text-primary-light dark:text-text-primary-dark relative
                                        before:content-[''] before:absolute before:-left-[30px] before:top-1/2 before:-translate-y-1/2
-                                       before:w-3 before:h-3 before:bg-text-link-light dark:before:bg-text-link-dark
+                                       before:w-3 before:h-3 before:bg-primary-600 dark:before:bg-primary-400
                                        before:rounded-full before:border-[3px] before:border-background-primary-light dark:before:border-background-primary-dark">
                           {year}
                         </h2>
@@ -224,7 +227,7 @@ const Archives: React.FC<Props> = ({ posts }) => {
                                                    border border-border-primary-light dark:border-border-primary-dark
                                                    rounded-lg transition-all duration-200 ease-in-out
                                                    hover:bg-background-secondary-light dark:hover:bg-background-secondary-dark
-                                                   hover:border-text-link-light dark:hover:border-text-link-dark"
+                                                   hover:border-border-secondary-light dark:hover:border-border-secondary-dark"
                                       >
                                         <div className="shrink-0 text-sm text-text-tertiary-light dark:text-text-tertiary-dark font-medium">
                                           {format(
@@ -237,19 +240,13 @@ const Archives: React.FC<Props> = ({ posts }) => {
                                             href={`/${post.slug}`}
                                             className="text-text-primary-light dark:text-text-primary-dark
                                                        no-underline font-medium leading-relaxed block mb-1
-                                                       hover:text-text-link-light dark:hover:text-text-link-dark"
+                                                       hover:text-text-primary-light dark:hover:text-text-primary-dark"
                                           >
                                             {post.frontmatter.title}
                                           </Link>
-                                          <div className="flex items-center gap-4 text-xs">
-                                            <span className="flex items-center gap-1 text-text-tertiary-light dark:text-text-tertiary-dark">
-                                              <BiTime className="text-sm" />
-                                              {post.readingTime}分钟
-                                            </span>
-                                            <span className="text-text-tertiary-light dark:text-text-tertiary-dark">
-                                              {post.frontmatter.categories[0] ||
-                                                "未分类"}
-                                            </span>
+                                          <div className="flex items-center gap-1 text-xs text-text-tertiary-light dark:text-text-tertiary-dark">
+                                            <BiTime className="text-sm" />
+                                            {post.readingTime}分钟
                                           </div>
                                         </div>
                                       </div>

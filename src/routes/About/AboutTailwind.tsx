@@ -17,17 +17,19 @@ const About: React.FC<Props> = ({ stats }) => {
   return (
     <div className="min-h-screen bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       {/* Header */}
-      <header className="sticky top-0 bg-background-primary-light dark:bg-background-primary-dark border-b border-border-primary-light dark:border-border-primary-dark z-50 backdrop-blur-[10px]">
-        <nav className="max-width-main mx-auto px-8 py-6 flex justify-between items-center">
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:-translate-x-0.5"
-          >
-            <BiArrowBack />
-            <span>返回首页</span>
-          </Link>
-          <ThemeToggle />
-        </nav>
+      <header className="sticky top-4 bg-background-primary-light/80 dark:bg-background-primary-dark/80 backdrop-blur-[10px] z-50">
+        <div className="max-width-main mx-auto px-8">
+          <nav className="flex justify-between items-center py-6 border-b border-border-primary-light dark:border-border-primary-dark">
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:-translate-x-0.5"
+            >
+              <BiArrowBack />
+              <span>返回首页</span>
+            </Link>
+            <ThemeToggle />
+          </nav>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -50,7 +52,7 @@ const About: React.FC<Props> = ({ stats }) => {
               <h2 className="text-[1.75rem] font-semibold mb-2 text-text-primary-light dark:text-text-primary-dark">
                 {CONFIG.profile.name}
               </h2>
-              <p className="text-lg text-text-link-light dark:text-text-link-dark mb-2">
+              <p className="text-lg text-primary-600 dark:text-primary-400 mb-2">
                 {CONFIG.profile.role}
               </p>
               <p className="text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
@@ -62,7 +64,7 @@ const About: React.FC<Props> = ({ stats }) => {
           {/* Stats Section */}
           <div className="grid grid-cols-3 gap-6 mb-12 max-sm:grid-cols-1">
             <div className="flex flex-col items-center p-8 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">
-              <div className="text-3xl text-text-link-light dark:text-text-link-dark mb-2">
+              <div className="text-3xl text-primary-600 dark:text-primary-400 mb-2">
                 <BiBookOpen />
               </div>
               <div className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">
@@ -73,7 +75,7 @@ const About: React.FC<Props> = ({ stats }) => {
               </div>
             </div>
             <div className="flex flex-col items-center p-8 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">
-              <div className="text-3xl text-text-link-light dark:text-text-link-dark mb-2">
+              <div className="text-3xl text-primary-600 dark:text-primary-400 mb-2">
                 <BiTag />
               </div>
               <div className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">
@@ -84,7 +86,7 @@ const About: React.FC<Props> = ({ stats }) => {
               </div>
             </div>
             <div className="flex flex-col items-center p-8 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-xl transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg">
-              <div className="text-3xl text-text-link-light dark:text-text-link-dark mb-2">
+              <div className="text-3xl text-primary-600 dark:text-primary-400 mb-2">
                 <BiFolder />
               </div>
               <div className="text-3xl font-bold text-text-primary-light dark:text-text-primary-dark">
@@ -117,22 +119,22 @@ const About: React.FC<Props> = ({ stats }) => {
                 技术栈
               </h3>
               <ul className="list-none grid grid-cols-2 gap-3 max-sm:grid-cols-1">
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   Next.js 15 - React 框架
                 </li>
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   TypeScript - 类型安全
                 </li>
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   Tailwind CSS - 原子化样式
                 </li>
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   Markdown - 内容管理
                 </li>
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   Highlight.js - 代码高亮
                 </li>
-                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-text-link-light dark:before:text-text-link-dark before:font-bold">
+                <li className="py-3 px-4 bg-background-secondary-light dark:bg-background-secondary-dark border border-border-primary-light dark:border-border-primary-dark rounded-lg text-text-secondary-light dark:text-text-secondary-dark text-sm before:content-['▸_'] before:text-primary-600 dark:before:text-primary-400 before:font-bold">
                   Mermaid - 流程图支持
                 </li>
               </ul>
@@ -145,10 +147,10 @@ const About: React.FC<Props> = ({ stats }) => {
               <div className="flex flex-col gap-4">
                 {CONFIG.profile.email && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
-                    <BiEnvelope className="text-xl text-text-link-light dark:text-text-link-dark" />
+                    <BiEnvelope className="text-xl text-primary-600 dark:text-primary-400" />
                     <a 
                       href={`mailto:${CONFIG.profile.email}`}
-                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:underline"
+                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:underline"
                     >
                       {CONFIG.profile.email}
                     </a>
@@ -156,12 +158,12 @@ const About: React.FC<Props> = ({ stats }) => {
                 )}
                 {CONFIG.profile.github && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
-                    <BiLogoGithub className="text-xl text-text-link-light dark:text-text-link-dark" />
+                    <BiLogoGithub className="text-xl text-primary-600 dark:text-primary-400" />
                     <a 
                       href={`https://github.com/${CONFIG.profile.github}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:underline"
+                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:underline"
                     >
                       @{CONFIG.profile.github}
                     </a>
@@ -169,12 +171,12 @@ const About: React.FC<Props> = ({ stats }) => {
                 )}
                 {CONFIG.link && (
                   <div className="flex items-center gap-3 text-text-secondary-light dark:text-text-secondary-dark">
-                    <BiGlobe className="text-xl text-text-link-light dark:text-text-link-dark" />
+                    <BiGlobe className="text-xl text-primary-600 dark:text-primary-400" />
                     <a 
                       href={CONFIG.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-link-light dark:hover:text-text-link-dark hover:underline"
+                      className="text-text-secondary-light dark:text-text-secondary-dark no-underline transition-all duration-200 ease-in-out hover:text-text-primary-light dark:hover:text-text-primary-dark hover:underline"
                     >
                       {CONFIG.link}
                     </a>

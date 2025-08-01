@@ -13,7 +13,7 @@ const CONFIG = {
   // blog setting (required)
   blog: {
     title: "Cosine 余弦是定理",
-    description: "welcome to my blog!",
+    description: "记录技术思考与生活感悟的数字空间",
   },
 
   // CONFIG configration (required)

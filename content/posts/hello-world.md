@@ -5,7 +5,6 @@ tags: ["技术", "博客"]
 categories: ["技术"]
 description: "这是我的第一篇博客文章"
 author: "余贤俊"
-cover: "/images/hello-world-cover.jpg"
 draft: false
 ---
 

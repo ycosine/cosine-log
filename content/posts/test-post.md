@@ -5,7 +5,7 @@ date: "2024-01-01"
 author: "余贤俊"
 tags: ["测试", "Next.js"]
 categories: ["技术"]
-cover: ""
+draft: false
 ---
 
 # 测试文章

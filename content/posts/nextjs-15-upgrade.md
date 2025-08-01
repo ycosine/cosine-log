@@ -5,7 +5,6 @@ tags: ["Next.js", "升级", "前端"]
 categories: ["技术"]
 description: "记录升级到 Next.js 15 的过程和注意事项"
 author: "余贤俊"
-cover: "/images/nextjs-15-cover.jpg"
 draft: false
 ---
 

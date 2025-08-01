@@ -75,7 +75,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       'article:published_time': publishedTime,
       'article:modified_time': modifiedTime,
       'article:author': post.frontmatter.author,
-      'article:section': post.frontmatter.categories.join(', '),
       'article:tag': post.frontmatter.tags.join(', '),
     },
   }
