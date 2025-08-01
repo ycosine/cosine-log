@@ -21,15 +21,28 @@ const useScheme = (): [Scheme, SetScheme] => {
 
   const setScheme = (scheme: "light" | "dark") => {
     setCookie("scheme", scheme)
-
     queryClient.setQueryData(queryKey.scheme(), scheme)
+    
+    // Update HTML class for Tailwind dark mode
+    if (typeof window !== "undefined") {
+      const root = window.document.documentElement
+      root.classList.remove("light", "dark")
+      root.classList.add(scheme)
+    }
   }
 
   useEffect(() => {
-    if (!window) return
+    if (typeof window === "undefined") return
 
-    const scheme = getCookie("scheme")
-    setScheme(scheme === "light" ? "light" : "dark")
+    const savedScheme = getCookie("scheme")
+    const currentScheme = savedScheme === "dark" ? "dark" : "light"
+    
+    // Set initial class
+    const root = window.document.documentElement
+    root.classList.remove("light", "dark")
+    root.classList.add(currentScheme)
+    
+    setScheme(currentScheme)
   }, [])
 
   return [scheme, setScheme]

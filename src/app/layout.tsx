@@ -1,7 +1,5 @@
-import './globals.css'
-import '../styles/typo-global.css'
+import '../styles/globals.css'
 import QueryProvider from './providers/QueryProvider'
-import { ThemeProvider } from '@/contexts/ThemeContext'
 
 export const metadata = {
   title: 'Cosine 余弦是定理',
@@ -28,12 +26,10 @@ export default function AppLayout({
           rel="stylesheet" 
         />
       </head>
-      <body style={{ margin: 0, padding: 0 }}>
-        <ThemeProvider>
-          <QueryProvider>
-            {children}
-          </QueryProvider>
-        </ThemeProvider>
+      <body>
+        <QueryProvider>
+          {children}
+        </QueryProvider>
       </body>
     </html>
   )

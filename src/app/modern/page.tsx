@@ -1,7 +1,7 @@
-import ModernFeed from 'src/routes/Feed/ModernFeed'
+import TypoFeed from 'src/routes/Feed/TypoFeed'
 import { getAllPosts } from 'src/libs/markdown/server'
 
 export default async function ModernPage() {
   const posts = await getAllPosts()
-  return <ModernFeed posts={posts} />
+  return <TypoFeed posts={posts} />
 }

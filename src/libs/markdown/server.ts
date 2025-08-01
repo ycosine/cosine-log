@@ -1,11 +1,10 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { remark } from 'remark'
-import remarkHtml from 'remark-html'
 import { format } from 'date-fns'
 import { zhCN } from 'date-fns/locale'
 import { imageProcessor } from './imageProcessor'
+import { processMarkdown } from './processor'
 import type { Post, PostFrontmatter } from './types'
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
@@ -63,12 +62,8 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     // 处理图片链接
     const { content: processedImageContent } = imageProcessor.processImages(content)
     
-    // 处理 Markdown 转 HTML
-    const processedContent = await remark()
-      .use(remarkHtml)
-      .process(processedImageContent)
-    
-    const htmlContent = processedContent.toString()
+    // 处理 Markdown 转 HTML（包括代码高亮和 Mermaid）
+    const htmlContent = await processMarkdown(processedImageContent)
     
     // 获取文件统计信息
     const stats = fs.statSync(fullPath)
