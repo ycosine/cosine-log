@@ -7,6 +7,7 @@ import Link from "next/link"
 import ThemeToggle from "src/components/ThemeToggle"
 import Footer from "src/components/Footer"
 import { MarkdownContent } from "src/components/MarkdownContent"
+import Comments from "src/components/Comments"
 import type { Post } from "src/libs/markdown/types"
 import { CONFIG } from "../../../site.config"
 
@@ -193,6 +194,8 @@ const PostDetail: React.FC<Props> = ({ post }) => {
           <div className="mb-16">
             <MarkdownContent content={post.htmlContent} />
           </div>
+
+          <Comments />
 
           {/* Article Footer */}
           <footer className="border-t border-dashed border-typo-light-hr dark:border-typo-dark-hr pt-8 flex flex-col gap-6">

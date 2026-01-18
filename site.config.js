@@ -5,7 +5,8 @@ const CONFIG = {
     image: "/avatar3.svg",
     role: "前端开发",
     bio: "让万物穿过自己",
-    aboutBio: "Cosine 是一个专注于技术分享和思考的个人博客。在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。", // About页面的简介
+    aboutBio:
+      "Cosine 是一个专注于技术分享和思考的个人博客。在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。", // About页面的简介
     email: "codecosine@gmail.com",
     github: "ycosine",
     instagram: "",
@@ -32,7 +33,7 @@ const CONFIG = {
   storageConfig: {
     enable: false, // 设置为 true 启用对象存储
     type: process.env.STORAGE_TYPE || "r2", // 'r2' or 'oss'
-    
+
     // Cloudflare R2 配置
     r2: {
       accountId: process.env.R2_ACCOUNT_ID || "",
@@ -41,7 +42,7 @@ const CONFIG = {
       bucket: process.env.R2_BUCKET || "",
       publicUrl: process.env.R2_PUBLIC_URL || "",
     },
-    
+
     // Alibaba Cloud OSS 配置 (向后兼容)
     oss: {
       region: process.env.OSS_REGION || "",
@@ -66,11 +67,26 @@ const CONFIG = {
     },
   },
   utterances: {
-    enable: true,
+    enable: false,
     config: {
       repo: process.env.NEXT_PUBLIC_UTTERANCES_REPO || "",
       "issue-term": "og:title",
       label: "💬 Utterances",
+    },
+  },
+  giscus: {
+    enable: true,
+    config: {
+      repo: "ycosine/cosine-log",
+      repoId: "R_kgDOKxcW1Q",
+      category: "Announcements",
+      categoryId: "DIC_kwDOKxcW1c4C1GWI",
+      mapping: "pathname",
+      strict: "0",
+      reactionsEnabled: "1",
+      emitMetadata: "0",
+      inputPosition: "bottom",
+      lang: "zh-CN",
     },
   },
   cusdis: {
