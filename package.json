@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "next dev -p 6789",
+    "sync": "node scripts/sync-content.js",
     "prebuild": "node scripts/copy-assets.js",
     "build": "NODE_OPTIONS='--max-old-space-size=1024' next build",
     "start": "next start -p 9876",
