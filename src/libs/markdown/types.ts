@@ -6,6 +6,7 @@ export interface PostFrontmatter {
   description: string
   author: string
   draft: boolean
+  cover?: string
 }
 
 export interface Post {

@@ -1,11 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['www.notion.so', 'lh5.googleusercontent.com', 's3-us-west-2.amazonaws.com'],
-    formats: ['image/webp', 'image/avif'],
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
+    formats: ["image/webp", "image/avif"],
+    remotePatterns: [
+      { hostname: "www.notion.so" },
+      { hostname: "lh5.googleusercontent.com" },
+      { hostname: "s3-us-west-2.amazonaws.com" },
+    ],
   },
   typescript: {
     ignoreBuildErrors: true,

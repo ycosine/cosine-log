@@ -1,26 +1,26 @@
-import { visit } from 'unist-util-visit'
-import type { Root, Text, Paragraph } from 'mdast'
-import path from 'path'
-import fs from 'fs'
-import { ensureAssetsDirectory } from '../ensure-assets'
+import { visit } from "unist-util-visit"
+import type { Root, Paragraph } from "mdast"
+import path from "path"
+import fs from "fs"
+import { ensureAssetsDirectory } from "../ensure-assets"
 
-const ASSETS_DIR = path.join(process.cwd(), 'content/assets')
-const PUBLIC_ASSETS_DIR = path.join(process.cwd(), 'public/assets')
+const ASSETS_DIR = path.join(process.cwd(), "content/assets")
+const PUBLIC_ASSETS_DIR = path.join(process.cwd(), "public/assets")
 
 // 确保 public/assets 目录存在
 ensureAssetsDirectory()
 
 export function remarkObsidianImage() {
   return (tree: Root) => {
-    visit(tree, 'paragraph', (node: Paragraph) => {
+    visit(tree, "paragraph", (node: Paragraph) => {
       const children = node.children
       let i = 0
 
       while (i < children.length) {
         const child = children[i]
-        
+
         // 查找包含 ![[filename]] 格式的文本节点
-        if (child.type === 'text' && child.value.includes('![[')) {
+        if (child.type === "text" && child.value.includes("![[")) {
           const text = child.value
           const regex = /!\[\[([^\]]+)\]\]/g
           let lastIndex = 0
@@ -31,15 +31,15 @@ export function remarkObsidianImage() {
             // 添加匹配前的文本
             if (match.index > lastIndex) {
               newChildren.push({
-                type: 'text',
-                value: text.slice(lastIndex, match.index)
+                type: "text",
+                value: text.slice(lastIndex, match.index),
               })
             }
 
             const filename = match[1]
             const sourcePath = path.join(ASSETS_DIR, filename)
             const targetPath = path.join(PUBLIC_ASSETS_DIR, filename)
-            
+
             // 复制文件到 public/assets（如果存在）
             if (fs.existsSync(sourcePath)) {
               try {
@@ -51,12 +51,12 @@ export function remarkObsidianImage() {
 
             // 创建图片节点
             newChildren.push({
-              type: 'image',
+              type: "image",
               url: `/assets/${filename}`,
-              alt: filename.replace(/\.[^/.]+$/, ''), // 移除扩展名作为 alt 文本
+              alt: filename.replace(/\.[^/.]+$/, ""), // 移除扩展名作为 alt 文本
               data: {
-                isObsidian: true
-              }
+                isObsidian: true,
+              },
             })
 
             lastIndex = regex.lastIndex
@@ -65,8 +65,8 @@ export function remarkObsidianImage() {
           // 添加剩余的文本
           if (lastIndex < text.length) {
             newChildren.push({
-              type: 'text',
-              value: text.slice(lastIndex)
+              type: "text",
+              value: text.slice(lastIndex),
             })
           }
 
