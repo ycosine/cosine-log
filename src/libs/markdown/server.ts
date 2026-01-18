@@ -44,9 +44,13 @@ export function getAllPostSlugs(): string[] {
 // 根据 slug 获取文章内容
 export async function getPostBySlug(slug: string): Promise<Post | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.md`)
+    // 解码 slug (处理中文路径)
+    // Necessary to decode URL-encoded Chinese characters in the slug
+    const decodedSlug = decodeURIComponent(slug)
+    const fullPath = path.join(postsDirectory, `${decodedSlug}.md`)
 
     if (!fs.existsSync(fullPath)) {
+      console.warn(`Post not found: ${decodedSlug}`)
       return null
     }
 

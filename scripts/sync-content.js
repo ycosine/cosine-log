@@ -63,7 +63,8 @@ files.forEach((file) => {
 
   // Create a URL-friendly filename (replace spaces with hyphens)
   // This helps prevent 404 errors with Next.js dynamic routes
-  const safeFilename = file.replace(/\s+/g, "-")
+  // Also normalize to NFC to prevent Mac/Linux path issues with Chinese characters
+  const safeFilename = file.replace(/\s+/g, "-").normalize("NFC")
 
   fs.writeFileSync(path.join(TARGET_POSTS_DIR, safeFilename), content)
   processedCount++
