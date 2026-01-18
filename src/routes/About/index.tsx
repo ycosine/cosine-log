@@ -23,25 +23,32 @@ const About: React.FC<Props> = ({ stats }) => {
       <header className="sticky top-4 bg-typo-light-background/80 dark:bg-typo-dark-background/80 backdrop-blur-[10px] z-50">
         <div className="max-width-main mx-auto px-[8vw]">
           <nav className="flex justify-between items-center py-6 border-b border-typo-light-hr dark:border-typo-dark-hr max-md:flex-col max-md:gap-4 max-md:py-4">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-2xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline typo-transition"
             >
               {CONFIG.blog.title}
             </Link>
             <div className="flex items-center gap-8 max-md:gap-6">
-              <Link 
-                href="/archives" 
+              <Link
+                href="/archives"
                 className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
               >
                 归档
               </Link>
-              <Link 
-                href="/about" 
+              <Link
+                href="/about"
                 className="text-typo-light-font dark:text-typo-dark-font no-underline text-base typo-transition underline"
               >
                 关于
               </Link>
+              <a
+                href="/feed.xml"
+                target="_blank"
+                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
+              >
+                RSS
+              </a>
               <ThemeToggle />
             </div>
           </nav>
@@ -65,7 +72,8 @@ const About: React.FC<Props> = ({ stats }) => {
           {/* Bio Section */}
           <section className="mb-12">
             <p className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary leading-relaxed mb-6">
-              {CONFIG.profile.aboutBio || `${CONFIG.blog.title} 是一个专注于技术分享和思考的个人博客。在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。`}
+              {CONFIG.profile.aboutBio ||
+                `${CONFIG.blog.title} 是一个专注于技术分享和思考的个人博客。在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。`}
             </p>
           </section>
 
@@ -137,7 +145,7 @@ const About: React.FC<Props> = ({ stats }) => {
           </section>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   )

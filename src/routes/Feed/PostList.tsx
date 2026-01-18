@@ -66,6 +66,13 @@ const PostList: React.FC<Props> = ({ posts }) => {
               >
                 关于
               </Link>
+              <a
+                href="/feed.xml"
+                target="_blank"
+                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
+              >
+                RSS
+              </a>
               <ThemeToggle />
             </div>
           </nav>
