@@ -1,8 +1,7 @@
-
-import TypoFeed from 'src/routes/Feed/TypoFeed'
-import { getAllPosts } from 'src/libs/markdown/server'
+import PostList from "src/routes/Feed/PostList"
+import { getAllPosts } from "src/libs/markdown/server"
 
 export default async function HomePage() {
   const posts = await getAllPosts()
-  return <TypoFeed posts={posts} />
+  return <PostList posts={posts} />
 }

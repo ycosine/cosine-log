@@ -6,7 +6,7 @@
 
 - **框架**: Next.js 15 + TypeScript
 - **样式**: Tailwind CSS
-- **数据获取**: React Query
+- **数据获取**: Server Components (content) + React Query (client state)
 - **内容管理**: 本地 Markdown 文件
 - **Markdown 处理**: remark, rehype, gray-matter
 
