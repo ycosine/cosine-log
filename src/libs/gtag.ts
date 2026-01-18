@@ -2,7 +2,7 @@ import { CONFIG } from "site.config"
 export const GA_TRACKING_ID = CONFIG.googleAnalytics.config.measurementId
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-export const pageview = (url: any) => {
+export const pageview = (url: string) => {
   if (typeof window !== "object") return
   window.gtag("config", GA_TRACKING_ID, {
     page_path: url,
@@ -16,10 +16,10 @@ export const event = ({
   label,
   value,
 }: {
-  action: any
-  category: any
-  label: any
-  value: any
+  action: string
+  category: string
+  label: string
+  value: number
 }) => {
   if (typeof window !== "object") return
   window.gtag("event", action, {

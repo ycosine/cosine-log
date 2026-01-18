@@ -13,7 +13,7 @@ type Props = {
   posts: Post[]
 }
 
-const TypoFeed: React.FC<Props> = ({ posts }) => {
+const PostList: React.FC<Props> = ({ posts }) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
   const postsPerPage = 10
@@ -192,4 +192,4 @@ const TypoFeed: React.FC<Props> = ({ posts }) => {
   )
 }
 
-export default TypoFeed
+export default PostList

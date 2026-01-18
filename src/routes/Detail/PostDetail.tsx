@@ -14,7 +14,7 @@ type Props = {
   post: Post
 }
 
-const TypoPostDetail: React.FC<Props> = ({ post }) => {
+const PostDetail: React.FC<Props> = ({ post }) => {
   const [showTitle, setShowTitle] = useState(false)
   const titleRef = useRef<HTMLHeadingElement>(null)
 
@@ -84,7 +84,7 @@ const TypoPostDetail: React.FC<Props> = ({ post }) => {
             </Link>
           </div>
         </main>
-        
+
         <Footer />
       </div>
     )
@@ -207,10 +207,10 @@ const TypoPostDetail: React.FC<Props> = ({ post }) => {
           </footer>
         </article>
       </main>
-      
+
       <Footer />
     </div>
   )
 }
 
-export default TypoPostDetail
+export default PostDetail
