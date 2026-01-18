@@ -61,8 +61,16 @@ files.forEach((file) => {
     }
   })
 
-  fs.writeFileSync(path.join(TARGET_POSTS_DIR, file), content)
+  // Create a URL-friendly filename (replace spaces with hyphens)
+  // This helps prevent 404 errors with Next.js dynamic routes
+  const safeFilename = file.replace(/\s+/g, "-")
+
+  fs.writeFileSync(path.join(TARGET_POSTS_DIR, safeFilename), content)
   processedCount++
+
+  if (safeFilename !== file) {
+    console.log(`Renamed: "${file}" -> "${safeFilename}"`)
+  }
 })
 
 console.log(`✅ Sync complete!`)
