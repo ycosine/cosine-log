@@ -1,5 +1,4 @@
 import "../styles/globals.css"
-import QueryProvider from "./providers/QueryProvider"
 import { ThemeProvider } from "./providers/ThemeProvider"
 import localFont from "next/font/local"
 
@@ -82,7 +81,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          <QueryProvider>{children}</QueryProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>

@@ -47,13 +47,6 @@ export class MarkdownImageProcessor {
    * 解析相对路径图片为绝对路径
    */
   private resolveImagePath(src: string): string {
-    // 如果配置了OSS，使用OSS的URL
-    if (CONFIG.storageConfig?.enable && CONFIG.storageConfig?.type === 'oss' && CONFIG.storageConfig?.oss?.baseUrl) {
-      const cleanSrc = src.replace(/^\.\//, '').replace(/^\.\.\//, '')
-      return `${CONFIG.storageConfig.oss.baseUrl}/images/${cleanSrc}`
-    }
-
-    // 回退到本地路径
     const cleanSrc = src.replace(/^\.\//, '').replace(/^\.\.\//, '')
     return `/images/${cleanSrc}`
   }

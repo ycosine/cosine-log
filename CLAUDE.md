@@ -4,51 +4,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a modern blog platform built with Next.js 15 that uses local Markdown files as the content source. The blog is called "Cosine 余弦是定理" and has been completely rewritten with a modern UI design and Markdown-based architecture.
+This is a personal blog ("Cosine 余弦是定理") built with Next.js 16 (App Router) that uses local Markdown files as the content source. Content is authored in an external Obsidian vault and synced into the repo.
 
 ## Development Commands
 
 - `pnpm dev` - Start development server on port 6789
-- `pnpm build` - Build for production (uses increased memory limit)
+- `pnpm build` - Build for production (runs `scripts/copy-assets.js` first via prebuild)
 - `pnpm start` - Start production server on port 9876
-- `pnpm lint` - Run ESLint for code quality checks
-- `pnpm postbuild` - Generate sitemap after build (automatically runs after build)
+- `pnpm lint` - Run oxlint on `src/` and `scripts/`
+- `pnpm sync` - Sync posts and images from the local Obsidian vault (path hardcoded in `scripts/sync-content.js`; wipes and regenerates `content/posts/`)
+- `pnpm postbuild` - Generate sitemap/robots.txt via next-sitemap (runs automatically after build; output is gitignored)
 
 ## Core Architecture
 
 ### Tech Stack
 
-- **Framework**: Next.js 15 with TypeScript
-- **Styling**: Tailwind CSS v4
-- **Data Fetching**: Server Components (content) + React Query (client state)
+- **Framework**: Next.js 16 (App Router) with TypeScript
+- **Styling**: Tailwind CSS v4 — note `src/styles/globals.css` loads `tailwind.config.js` via `@config`; the custom palette lives in that file, do not delete it
 - **Content**: Local Markdown files with frontmatter
-- **Markdown Processing**: remark, rehype, gray-matter
-- **File Storage**: Optional Alibaba Cloud OSS integration
+- **Markdown Processing**: unified pipeline (remark-parse → remark-gfm → remark-rehype → rehype-highlight → rehype-stringify) plus custom plugins (mermaid, Obsidian `![[]]` images, next-image)
+- **Comments**: Giscus (config hardcoded in `site.config.js`)
 
 ### Key Directory Structure
 
-- `content/posts/` - Markdown blog posts with frontmatter
-- `src/pages/` - Next.js pages including API routes
-- `src/routes/` - Main UI components (PostList, PostDetail)
-- `src/apis/markdown-client/` - Markdown file processing API
-- `src/libs/markdown/` - Core markdown parsing and utilities
-- `src/libs/oss/` - OSS file upload utilities
-- `src/hooks/` - Custom React hooks for data fetching
-- `src/components/` - Reusable UI components
-- `src/styles/` - Modern color system and theme definitions
+- `content/posts/` - Markdown blog posts with frontmatter (synced from Obsidian; do not hand-edit if using `pnpm sync`, it wipes this directory)
+- `src/app/` - App Router routes: `page.tsx` (feed), `[slug]/page.tsx` (post detail), `about/`, `archives/`, `feed.xml/route.ts` (RSS), `layout.tsx`, `not-found.tsx`
+- `src/routes/` - Main UI components (Feed/PostList, Detail/PostDetail, About, Archives)
+- `src/libs/markdown/` - Markdown parsing: `server.ts` (reads `content/posts`, filters drafts), `processor.ts` (unified pipeline), `imageProcessor.ts`, `plugins/`
+- `src/components/` - Reusable UI components (MarkdownContent, Comments, Footer, ThemeToggle)
+- `src/styles/globals.css` - All global styles and the highlight.js theme (hand-written `.hljs-*` rules)
+- `scripts/` - `sync-content.js` (Obsidian sync), `copy-assets.js` (prebuild asset copy)
 
 ### Data Flow
 
-1. **Content Creation**: Write Markdown files in `content/posts/` with frontmatter
-2. **File Processing**: `src/libs/markdown/index.ts` reads and parses Markdown files
-3. **API Layer**: `src/apis/markdown-client/` provides data access methods
-4. **State Management**: React Query (client) and Server Components (content)
-5. **Rendering**: Modern UI components display content with responsive design
-
-### Main Components
-
-- **PostList** (`src/routes/Feed/PostList.tsx`): Main feed with search and filtering
-- **PostDetail** (`src/routes/Detail/PostDetail.tsx`): Article view with typography optimization
+1. Write posts in the Obsidian vault, run `pnpm sync` to copy them into `content/posts/`
+2. `src/libs/markdown/server.ts` reads and parses Markdown at build/request time (Server Components)
+3. `src/routes/` components render the feed and post detail pages
 
 ## Content Management
 
@@ -64,80 +55,14 @@ tags: ["tag1", "tag2"]
 categories: ["category"]
 description: "Article description"
 author: "Author Name"
-cover: "/images/cover.jpg"
 draft: false
 ---
 
 # Content starts here...
 ```
 
-### Required Fields
-
-- `title`: Article title
-- `date`: Publication date (YYYY-MM-DD format)
-- `tags`: Array of tags
-- `categories`: Array of categories
-- `description`: Article description/summary
-- `author`: Author name
-- `draft`: Whether article is draft (true/false)
-
-### Optional Fields
-
-- `cover`: Cover image URL or path
+`cover` is optional. Posts with `draft: true` are excluded from the site. Filenames use hyphens instead of spaces (the sync script enforces this) and are NFC-normalized for Chinese titles.
 
 ## Configuration
 
-### Site Configuration
-
-All site settings are in `site.config.js`:
-
-- Profile information, blog metadata
-- Markdown configuration (posts directory)
-- OSS configuration for image uploads
-- Plugin settings (Google Analytics, comments, etc.)
-
-### Environment Variables
-
-See `.env.example` for complete list:
-
-- `OSS_*`: Optional - Alibaba Cloud OSS configuration for image uploads
-- `NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID`: Optional - Google Analytics
-- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`: Optional - Google Search Console
-- `NEXT_PUBLIC_UTTERANCES_REPO`: Optional - GitHub repo for comments
-
-## Development Notes
-
-### Modern UI Design
-
-- **Color System**: Comprehensive light/dark theme with primary, secondary, accent colors
-- **Typography**: Optimized reading experience with proper spacing and hierarchy
-- **Responsive Layout**: Mobile-first design with clean card-based layouts
-- **Interactive Elements**: Hover effects, smooth transitions, modern buttons and inputs
-
-### Content Processing
-
-- **Markdown Parsing**: Full support for standard Markdown with code highlighting
-- **Frontmatter Processing**: Structured metadata extraction
-- **Reading Time**: Automatic calculation based on content length
-- **Search & Filtering**: Real-time search with tag and category filtering
-
-### Performance Optimizations
-
-- **Static Generation**: All posts are statically generated at build time
-- **Image Optimization**: Next.js image optimization with OSS integration
-- **Code Splitting**: Automatic code splitting for optimal loading
-- **Caching**: Next.js Cache for static content
-
-### File Upload (OSS)
-
-- **Image Upload**: Configurable OSS integration for image hosting
-- **Asset Management**: Centralized asset handling with CDN support
-- **Security**: Environment-based credentials management
-
-### Docker Support
-
-The project includes Docker configuration:
-
-- `Dockerfile` for containerization
-- `docker-compose.yml` for local development
-- `deploy.sh` for deployment automation
+All site settings are in `site.config.js`: profile, blog metadata, site URL, and Giscus comment config. There are no required environment variables.

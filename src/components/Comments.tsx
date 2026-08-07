@@ -2,7 +2,7 @@
 
 import Giscus from "@giscus/react"
 import { useTheme } from "next-themes"
-import { CONFIG } from "site.config"
+import { CONFIG } from "../../site.config"
 
 export default function Comments() {
   const { resolvedTheme } = useTheme()
@@ -18,7 +18,7 @@ export default function Comments() {
         category={CONFIG.giscus.config.category}
         categoryId={CONFIG.giscus.config.categoryId}
         mapping={CONFIG.giscus.config.mapping as any}
-        strict={CONFIG.giscus.config.strict}
+        strict={CONFIG.giscus.config.strict as any}
         reactionsEnabled={CONFIG.giscus.config.reactionsEnabled as any}
         emitMetadata={CONFIG.giscus.config.emitMetadata as any}
         inputPosition={CONFIG.giscus.config.inputPosition as any}

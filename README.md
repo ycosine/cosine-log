@@ -2,11 +2,11 @@
 
 > 记录技术思考与生活感悟的数字空间
 
-一个基于 **Next.js 15** 构建的现代博客系统，深度集成 **Obsidian** 工作流，拥有极简的设计和优秀的阅读体验。
+一个基于 **Next.js 16** 构建的现代博客系统，深度集成 **Obsidian** 工作流，拥有极简的设计和优秀的阅读体验。
 
 ## ✨ 特性
 
-- 🛠 **现代化技术栈**: Next.js 15 (App Router), TypeScript, Tailwind CSS v4
+- 🛠 **现代化技术栈**: Next.js 16 (App Router), TypeScript, Tailwind CSS v4
 - 📝 **Obsidian 友好**: 支持直接同步 Obsidian 笔记库，自动处理 `![[]]` 图片链接和资源引用
 - 🌗 **暗黑模式**: 完美适配的日间/夜间模式，无闪烁切换 (next-themes)
 - 💬 **评论系统**: 集成 Giscus (基于 GitHub Discussions)，支持 Markdown 和 Emoji
@@ -68,10 +68,6 @@ pnpm start
 - Giscus 评论配置
 - 社交媒体链接
 
-### 环境变量
-
-参考 `.env.example` 配置环境变量（如果需要）。目前主要配置项均在 `site.config.js` 中。
-
 ## 📂 项目结构
 
 ```
@@ -85,7 +81,7 @@ cosine-log/
 ├── src/
 │   ├── app/            # Next.js App Router 路由
 │   ├── components/     # React UI 组件
-│   ├── libs/           # 工具库 (Markdown解析, OSS等)
+│   ├── libs/           # 工具库 (Markdown 解析等)
 │   └── styles/         # 全局样式 (Tailwind)
 └── site.config.js      # 全局配置文件
 ```

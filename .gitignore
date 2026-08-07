@@ -33,8 +33,15 @@ yarn-error.log*
 
 # vercel
 .vercel
-# public/robots.txt
+public/robots.txt
 public/sitemap.xml
 public/assets/
+
+# typescript
+tsconfig.tsbuildinfo
+
+# editor / local settings
+.vscode/
+.claude/settings.local.json
 
 /.firebase
