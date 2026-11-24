@@ -1,5 +1,3 @@
-import { CONFIG } from '../../../site.config.js'
-
 interface ImageProcessResult {
   content: string
   processedImages: string[]
@@ -27,11 +25,10 @@ export class MarkdownImageProcessor {
         return `![${alt}](${absoluteSrc})`
       }
       
-      // 如果是以 / 开头的绝对路径，添加域名前缀
+      // 以 / 开头的站内路径保持相对，便于在预览域名和正式域名下都能加载
       if (src.startsWith('/')) {
-        const fullUrl = `${CONFIG.link}${src}`
-        processedImages.push(fullUrl)
-        return `![${alt}](${fullUrl})`
+        processedImages.push(src)
+        return match
       }
 
       return match

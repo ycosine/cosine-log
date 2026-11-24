@@ -31,8 +31,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# vercel
-.vercel
+# cloudflare
+.wrangler
 public/robots.txt
 public/sitemap.xml
 public/assets/

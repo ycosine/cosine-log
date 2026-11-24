@@ -92,6 +92,5 @@ export default async function PostPage({ params }: Props) {
   return <Detail post={post} />
 }
 
-// 启用静态生成
-export const dynamic = 'force-static'
-export const revalidate = 604800 // 7 days in seconds
+// 静态导出：只生成 generateStaticParams 返回的页面
+export const dynamicParams = false

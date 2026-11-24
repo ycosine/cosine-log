@@ -9,11 +9,12 @@ This is a personal blog ("Cosine 余弦是定理") built with Next.js 16 (App Ro
 ## Development Commands
 
 - `pnpm dev` - Start development server on port 6789
-- `pnpm build` - Build for production (runs `scripts/copy-assets.js` first via prebuild)
-- `pnpm start` - Start production server on port 9876
+- `pnpm build` - Static export to `out/` (runs `scripts/copy-assets.js` first via prebuild)
+- `pnpm preview` - Serve `out/` locally with wrangler on port 9876, emulating Cloudflare (run `pnpm build` first)
+- `pnpm deploy` - Deploy `out/` with wrangler (normally done by Cloudflare Workers Builds on push to `main`)
 - `pnpm lint` - Run oxlint on `src/` and `scripts/`
 - `pnpm sync` - Sync posts and images from the local Obsidian vault (path hardcoded in `scripts/sync-content.js`; wipes and regenerates `content/posts/`)
-- `pnpm postbuild` - Generate sitemap/robots.txt via next-sitemap (runs automatically after build; output is gitignored)
+- `pnpm postbuild` - Generate sitemap/robots.txt into `out/` via next-sitemap (runs automatically after build)
 
 ## Core Architecture
 
@@ -62,6 +63,10 @@ draft: false
 ```
 
 `cover` is optional. Posts with `draft: true` are excluded from the site. Filenames use hyphens instead of spaces (the sync script enforces this) and are NFC-normalized for Chinese titles.
+
+## Deployment
+
+Deployed as a fully static site (`output: 'export'`) to Cloudflare Workers Static Assets at https://xianjun.cc, via Cloudflare Workers Builds (Git integration, build `pnpm build`, deploy `npx wrangler deploy`). Config lives in `wrangler.jsonc`; cache headers in `public/_headers`. Constraints of static export: no ISR/`revalidate`, no `next/image` optimization, route handlers must be `force-static`, and `trailingSlash` must stay `false` (Giscus maps comments by pathname).
 
 ## Configuration
 

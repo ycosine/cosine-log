@@ -1,0 +1,11 @@
+# Next.js 带 hash 的构建产物，内容不变，可永久缓存
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 文章图片：文件名不带 hash，缓存 30 天
+/images/*
+  Cache-Control: public, max-age=2592000
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=3600

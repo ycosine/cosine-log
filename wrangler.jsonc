@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cosine-log",
+  "compatibility_date": "2026-11-01",
+  // 部署时自动创建 xianjun.cc 的 DNS 记录与证书（zone 已在本账号）
+  "routes": [{ "pattern": "xianjun.cc", "custom_domain": true }],
+  // 保留 *.workers.dev 预览地址
+  "workers_dev": true,
+  "assets": {
+    "directory": "./out",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

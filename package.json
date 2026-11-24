@@ -11,7 +11,8 @@
     "sync": "node scripts/sync-content.js",
     "prebuild": "node scripts/copy-assets.js",
     "build": "NODE_OPTIONS='--max-old-space-size=1024' next build",
-    "start": "next start -p 9876",
+    "preview": "wrangler dev --port 9876",
+    "deploy": "wrangler deploy",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "lint": "oxlint src scripts"
   },
@@ -45,6 +46,7 @@
     "postcss": "^8.4.35",
     "prettier": "^2.7.1",
     "tailwindcss": "^4.1.11",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "wrangler": "^4.166.0"
   }
 }

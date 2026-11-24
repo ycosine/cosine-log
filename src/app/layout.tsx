@@ -64,7 +64,7 @@ const jetbrainsMono = localFont({
 export const metadata = {
   title: "Cosine 余弦是定理",
   description: "welcome to my blog!",
-  metadataBase: new URL("https://www.0xcos.com"),
+  metadataBase: new URL("https://xianjun.cc"),
 }
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {

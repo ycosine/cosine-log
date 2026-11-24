@@ -23,7 +23,7 @@
    - 自动将文章复制到 `content/posts/`
    - 自动将文件名中的空格转换为连字符 `-` (SEO 友好)
    - 自动解析并复制文章中引用的图片资源到 `public/images/`
-3. **发布**: 提交代码触发 Vercel 自动构建
+3. **发布**: 推送到 GitHub，触发 Cloudflare Workers 自动构建并部署到 https://xianjun.cc
 
 ## 🛠 开发指南
 

@@ -1,6 +1,8 @@
 import { getAllPosts } from "src/libs/markdown/server"
 import { CONFIG } from "../../../site.config"
 
+export const dynamic = "force-static"
+
 export async function GET() {
   const posts = await getAllPosts()
   const siteUrl = CONFIG.link
@@ -35,10 +37,8 @@ export async function GET() {
   </channel>
 </rss>`
 
+  // 缓存头在 public/_headers 中配置
   return new Response(rss, {
-    headers: {
-      "Content-Type": "text/xml",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
-    },
+    headers: { "Content-Type": "application/rss+xml; charset=utf-8" },
   })
 }
