@@ -22,13 +22,23 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          "var(--font-inter)",
+          "var(--font-sans)",
           '"PingFang SC"',
           '"Hiragino Sans GB"',
           '"Noto Sans SC"',
           '"Microsoft YaHei"',
           "system-ui",
           "sans-serif",
+        ],
+        serif: [
+          "var(--font-serif)",
+          '"Songti SC"',
+          '"Noto Serif SC"',
+          '"Source Han Serif SC"',
+          "STSong",
+          "SimSun",
+          "Georgia",
+          "serif",
         ],
         mono: [
           "var(--font-mono)",

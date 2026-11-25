@@ -8,7 +8,7 @@ export default function NotFound() {
       <SiteHeader />
       <main className="mx-auto flex min-h-[60vh] max-w-[680px] flex-col justify-center gap-4 px-5 md:px-6">
         <p className="font-mono text-[13px] text-ink-3">404</p>
-        <h1 className="text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
+        <h1 className="font-serif text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
           这一页不存在
         </h1>
         <p className="text-base leading-[1.85] text-ink-2">

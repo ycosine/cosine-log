@@ -20,7 +20,7 @@ export default function Home({ posts }: Props) {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader active="home" />
       <main className="mx-auto max-w-[680px] px-5 md:px-6">
         <section className="flex flex-col gap-3 pt-9 pb-12 md:gap-4 md:pt-14 md:pb-[72px]">
           <h1 className="text-base font-semibold">{CONFIG.profile.name}</h1>

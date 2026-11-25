@@ -21,7 +21,7 @@ export default function PostDetail({ post, prev, next }: Props) {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader active="home" />
       <ReadingProgress />
 
       <div className="flex justify-center gap-14 px-5 md:px-6">
@@ -37,7 +37,7 @@ export default function PostDetail({ post, prev, next }: Props) {
             全部文章
           </Link>
 
-          <h1 className="mb-3.5 text-[25px] leading-[1.4] font-bold tracking-[-0.02em] md:mb-5 md:text-[34px] md:leading-[1.35]">
+          <h1 className="mb-3.5 font-serif text-[25px] leading-[1.4] font-bold tracking-[-0.02em] md:mb-5 md:text-[34px] md:leading-[1.35]">
             {title}
           </h1>
 
@@ -71,7 +71,7 @@ export default function PostDetail({ post, prev, next }: Props) {
               {prev ? (
                 <Link href={`/${prev.slug}`} className="group flex flex-col gap-1.5">
                   <span className="font-mono text-xs text-ink-3">← 上一篇</span>
-                  <span className="text-[15px] leading-normal underline-offset-4 group-hover:underline">
+                  <span className="font-serif text-[15px] leading-normal underline-offset-4 group-hover:underline">
                     {prev.title}
                   </span>
                 </Link>
@@ -84,7 +84,7 @@ export default function PostDetail({ post, prev, next }: Props) {
                   className="group flex flex-col gap-1.5 text-right"
                 >
                   <span className="font-mono text-xs text-ink-3">下一篇 →</span>
-                  <span className="text-[15px] leading-normal underline-offset-4 group-hover:underline">
+                  <span className="font-serif text-[15px] leading-normal underline-offset-4 group-hover:underline">
                     {next.title}
                   </span>
                 </Link>

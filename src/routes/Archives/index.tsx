@@ -30,7 +30,7 @@ export default function Archives({ posts }: Props) {
       <SiteHeader active="archives" />
       <main className="mx-auto max-w-[680px] px-5 md:px-6">
         <section className="flex flex-col gap-3 pt-9 pb-10 md:pt-14 md:pb-14">
-          <h1 className="text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
+          <h1 className="font-serif text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
             归档
           </h1>
           <p className="font-mono text-[13px] text-ink-3">

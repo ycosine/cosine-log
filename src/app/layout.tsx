@@ -1,13 +1,20 @@
 import "../styles/globals.css"
 import type { Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Hanken_Grotesk, Roboto_Serif } from "next/font/google"
 import localFont from "next/font/local"
 import { ThemeProvider } from "./providers/ThemeProvider"
 
-// 拉丁字符用 Inter；中文走系统字体（苹方 / 思源黑体 / 微软雅黑），见 tailwind.config.js
-const inter = Inter({
+// 拉丁字符：正文 / 界面用 Hanken Grotesk，标题用 Roboto Serif；
+// 中文走系统字体（黑体 / 宋体），见 tailwind.config.js
+const sans = Hanken_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
+  display: "swap",
+})
+
+const serif = Roboto_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
   display: "swap",
 })
 
@@ -43,7 +50,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${sans.variable} ${serif.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <ThemeProvider

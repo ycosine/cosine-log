@@ -21,7 +21,7 @@ This is a personal blog ("Cosine 余弦是定理") built with Next.js 16 (App Ro
 ### Tech Stack
 
 - **Framework**: Next.js 16 (App Router) with TypeScript
-- **Styling**: Tailwind CSS v4 — `src/styles/globals.css` loads `tailwind.config.js` via `@config`. The palette ("纯墨") is CSS variables in `globals.css` (`:root` light, `.dark` dark); `tailwind.config.js` maps them to utilities (`bg-paper`, `text-ink`, `text-ink-2/3`, `text-body`, `border-rule`, `border-rule-2`, `bg-soft`). Keep both. Fonts: Inter (next/font/google) for Latin, system CJK fonts for Chinese, local JetBrains Mono for code/meta
+- **Styling**: Tailwind CSS v4 — `src/styles/globals.css` loads `tailwind.config.js` via `@config`. The palette ("纯墨") is CSS variables in `globals.css` (`:root` light, `.dark` dark); `tailwind.config.js` maps them to utilities (`bg-paper`, `text-ink`, `text-ink-2/3`, `text-body`, `border-rule`, `border-rule-2`, `bg-soft`). Keep both. Fonts: Hanken Grotesk (UI/body) and Roboto Serif (titles, `font-serif`) via next/font/google for Latin, system CJK sans/serif fallbacks for Chinese, local JetBrains Mono for code/meta
 - **Content**: Local Markdown files with frontmatter
 - **Markdown Processing**: unified pipeline (remark-parse → remark-gfm → remark-rehype → rehype-highlight → rehype-stringify) plus custom plugins (mermaid, Obsidian `![[]]` images, next-image, `rehype-toc` for heading ids + TOC, `rehype-code-block` for the language label/copy button)
 - **Comments**: Giscus (config hardcoded in `site.config.js`)

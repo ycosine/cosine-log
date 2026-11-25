@@ -19,7 +19,7 @@ export default function About({ stats }: Props) {
       <SiteHeader active="about" />
       <main className="mx-auto max-w-[680px] px-5 pb-24 md:px-6">
         <section className="flex flex-col gap-5 pt-9 pb-12 md:pt-14 md:pb-16">
-          <h1 className="text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
+          <h1 className="font-serif text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
             关于
           </h1>
           <p className="text-base leading-[1.85] text-body">

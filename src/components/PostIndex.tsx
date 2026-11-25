@@ -19,7 +19,7 @@ export default function PostIndex({ posts }: Props) {
     <div className="flex flex-col gap-10 md:gap-14">
       {groups.map((group) => (
         <section key={group.year} className="flex flex-col">
-          <h2 className="-mb-2.5 select-none text-[36px] font-extrabold leading-none tracking-[-0.04em] text-rule md:-mb-3 md:-ml-0.5 md:text-[44px]">
+          <h2 className="mb-2 select-none text-[36px] font-extrabold leading-none tracking-[-0.04em] text-rule md:mb-3 md:-ml-0.5 md:text-[44px]">
             {group.year}
           </h2>
           {group.posts.map((post) => (
@@ -28,7 +28,7 @@ export default function PostIndex({ posts }: Props) {
               href={`/${post.slug}`}
               className="group relative flex flex-col gap-1 border-b border-rule-2 py-3.5 md:flex-row md:items-baseline md:justify-between md:gap-6"
             >
-              <span className="text-base leading-normal decoration-1 underline-offset-4 group-hover:underline">
+              <span className="font-serif text-base leading-normal decoration-1 underline-offset-4 group-hover:underline">
                 {post.title}
               </span>
               <span className="shrink-0 font-mono text-xs text-ink-3 md:text-[13px]">
