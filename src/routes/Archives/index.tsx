@@ -33,8 +33,9 @@ export default function Archives({ posts }: Props) {
           <h1 className="font-serif text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
             归档
           </h1>
-          <p className="font-mono text-[13px] text-ink-3">
-            {posts.length} 篇 · {years} 年
+          <p className="flex gap-4 font-mono text-[13px] text-ink-3">
+            <span>{posts.length} 篇</span>
+            <span>{years} 年</span>
           </p>
           <input
             type="search"

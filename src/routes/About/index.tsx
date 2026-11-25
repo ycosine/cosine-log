@@ -25,9 +25,10 @@ export default function About({ stats }: Props) {
           <p className="text-base leading-[1.85] text-body">
             {CONFIG.profile.aboutBio}
           </p>
-          <p className="font-mono text-[13px] text-ink-3">
-            {stats.totalPosts} 篇文章 · {stats.totalTags} 个标签 · 始于{" "}
-            {stats.since}
+          <p className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[13px] text-ink-3">
+            <span>{stats.totalPosts} 篇文章</span>
+            <span>{stats.totalTags} 个标签</span>
+            <span>始于 {stats.since}</span>
           </p>
         </section>
 

@@ -66,7 +66,9 @@ export function TocDetails({ items }: Props) {
   return (
     <details className="group border-y border-rule open:pb-3 [&_summary::-webkit-details-marker]:hidden">
       <summary className="flex h-12 cursor-pointer list-none items-center justify-between text-[13px] text-ink-2">
-        <span>目录 · {sections} 节</span>
+        <span>
+          目录<span className="ml-3 text-ink-3">{sections} 节</span>
+        </span>
         <ChevronUpIcon size={16} className="rotate-180 transition-transform group-open:rotate-0" />
       </summary>
       <nav aria-label="目录" className="flex flex-col items-start text-sm">

@@ -36,7 +36,7 @@ const CONFIG = {
       categoryId: "DIC_kwDOKxcW1c4C1GWI",
       mapping: "pathname",
       strict: "0",
-      reactionsEnabled: "1",
+      reactionsEnabled: "0",
       emitMetadata: "0",
       inputPosition: "bottom",
       lang: "zh-CN",

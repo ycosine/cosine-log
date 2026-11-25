@@ -6,7 +6,6 @@ import { MarkdownContent } from "src/components/MarkdownContent"
 import Comments from "src/components/Comments"
 import ReadingProgress from "src/components/ReadingProgress"
 import { TocAside, TocDetails } from "src/components/TableOfContents"
-import { ArrowLeftIcon } from "src/components/icons"
 import type { Post, PostLink } from "src/libs/markdown/types"
 
 type Props = {
@@ -28,26 +27,16 @@ export default function PostDetail({ post, prev, next }: Props) {
         {/* 左侧占位，让正文在宽屏上居中 */}
         <div className="hidden w-[180px] shrink-0 xl:block" />
 
-        <article className="w-full max-w-[632px] min-w-0 pt-7 pb-24 md:pt-16">
-          <Link
-            href="/"
-            className="mb-10 hidden items-center gap-1.5 text-sm text-ink-3 transition-colors hover:text-ink md:inline-flex"
-          >
-            <ArrowLeftIcon size={16} />
-            全部文章
-          </Link>
-
+        <article className="w-full max-w-[632px] min-w-0 pt-7 pb-24 md:pt-10">
           <h1 className="mb-3.5 font-serif text-[25px] leading-[1.4] font-bold tracking-[-0.02em] md:mb-5 md:text-[34px] md:leading-[1.35]">
             {title}
           </h1>
 
-          <div className="flex flex-wrap gap-x-3 gap-y-1 pb-5 font-mono text-xs text-ink-3 md:gap-x-3.5 md:gap-y-1.5 md:border-b md:border-rule md:pb-8 md:text-[13px]">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 pb-5 font-mono text-xs text-ink-3 md:gap-x-5 md:gap-y-1.5 md:border-b md:border-rule md:pb-8 md:text-[13px]">
             <time dateTime={format(new Date(date), "yyyy-MM-dd")}>
               {format(new Date(date), "yyyy-MM-dd")}
             </time>
-            <span aria-hidden="true">·</span>
             <span>{post.readingTime} min</span>
-            {tags.length > 0 && <span aria-hidden="true">·</span>}
             {tags.map((tag) => (
               <span key={tag}>#{tag}</span>
             ))}
@@ -92,12 +81,21 @@ export default function PostDetail({ post, prev, next }: Props) {
             </nav>
           )}
 
+          <Link
+            href="/"
+            className={`inline-block font-mono text-[13px] text-ink-3 transition-colors hover:text-ink ${
+              prev || next ? "mt-10" : "mt-16 border-t border-rule pt-6 md:mt-[72px]"
+            }`}
+          >
+            ← 全部文章
+          </Link>
+
           <Comments />
         </article>
 
         <aside className="hidden w-[180px] shrink-0 xl:block">
           {hasToc && (
-            <div className="sticky top-24 mt-[236px] max-h-[calc(100vh-8rem)] overflow-y-auto pb-6">
+            <div className="sticky top-24 mt-[152px] max-h-[calc(100vh-8rem)] overflow-y-auto pb-6">
               <TocAside items={post.toc} />
             </div>
           )}

@@ -34,7 +34,7 @@ export default function PostIndex({ posts }: Props) {
               <span className="shrink-0 font-mono text-xs text-ink-3 md:text-[13px]">
                 {post.date.slice(5, 10)}
                 {post.tags[0] && (
-                  <span className="md:hidden"> · {post.tags[0]}</span>
+                  <span className="ml-3 md:hidden">{post.tags[0]}</span>
                 )}
               </span>
             </Link>

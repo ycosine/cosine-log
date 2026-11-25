@@ -35,12 +35,6 @@ export const SunIcon = (p: IconProps) => (
   </Icon>
 )
 
-export const ArrowLeftIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <path d="M19 12H5M11 6l-6 6 6 6" />
-  </Icon>
-)
-
 export const ChevronUpIcon = (p: IconProps) => (
   <Icon {...p}>
     <path d="M6 15l6-6 6 6" />
