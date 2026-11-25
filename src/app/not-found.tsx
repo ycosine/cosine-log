@@ -1,34 +1,27 @@
+import Link from "next/link"
+import SiteHeader from "src/components/SiteHeader"
+import Footer from "src/components/Footer"
+
 export default function NotFound() {
   return (
-    <div style={{ 
-      minHeight: '100vh', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      padding: '2rem',
-      textAlign: 'center' 
-    }}>
-      <div>
-        <h1 style={{ fontSize: '4rem', margin: '0 0 1rem 0' }}>404</h1>
-        <h2 style={{ fontSize: '2rem', margin: '0 0 1rem 0' }}>页面不存在</h2>
-        <p style={{ fontSize: '1.125rem', margin: '0 0 2rem 0' }}>
-          抱歉，您要访问的页面不存在或已被删除。
+    <>
+      <SiteHeader />
+      <main className="mx-auto flex min-h-[60vh] max-w-[680px] flex-col justify-center gap-4 px-5 md:px-6">
+        <p className="font-mono text-[13px] text-ink-3">404</p>
+        <h1 className="text-[25px] font-bold tracking-[-0.02em] md:text-[34px]">
+          这一页不存在
+        </h1>
+        <p className="text-base leading-[1.85] text-ink-2">
+          可能是链接写错了，或者文章已经移走。
         </p>
-        <a 
-          href="/" 
-          style={{ 
-            display: 'inline-block',
-            padding: '0.75rem 1.5rem',
-            backgroundColor: '#0ea5e9',
-            color: 'white',
-            textDecoration: 'none',
-            borderRadius: '8px',
-            fontWeight: '500'
-          }}
+        <Link
+          href="/"
+          className="mt-2 self-start border-b border-rule pb-0.5 text-sm text-ink-3 transition-colors hover:border-ink hover:text-ink"
         >
-          返回首页
-        </a>
-      </div>
-    </div>
+          回到首页
+        </Link>
+      </main>
+      <Footer />
+    </>
   )
 }

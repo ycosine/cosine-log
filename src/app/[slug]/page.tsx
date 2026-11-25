@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Detail from 'src/routes/Detail'
-import { getPost, getAllPostSlugs } from 'src/libs/markdown/server'
+import PostDetail from 'src/routes/Detail/PostDetail'
+import { getPost, getAllPostSlugs, getPostIndex } from 'src/libs/markdown/server'
 import { CONFIG } from '../../../site.config'
 
 interface Props {
@@ -89,7 +89,13 @@ export default async function PostPage({ params }: Props) {
     notFound()
   }
 
-  return <Detail post={post} />
+  // 索引按日期降序：上一篇 = 更早（index + 1），下一篇 = 更新（index - 1）
+  const index = getPostIndex()
+  const i = index.findIndex((p) => p.slug === decodeURIComponent(post.slug))
+  const link = (n: number) =>
+    i >= 0 && index[n] ? { slug: index[n].slug, title: index[n].title } : null
+
+  return <PostDetail post={post} prev={link(i + 1)} next={link(i - 1)} />
 }
 
 // 静态导出：只生成 generateStaticParams 返回的页面

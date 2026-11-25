@@ -7,6 +7,9 @@ import rehypeStringify from 'rehype-stringify'
 import { remarkObsidianImage } from './plugins/remark-obsidian-image'
 import { remarkNextImage } from './plugins/remark-next-image'
 import { rehypeMermaidSimple } from './plugins/rehype-mermaid'
+import { rehypeToc } from './plugins/rehype-toc'
+import { rehypeCodeBlock } from './plugins/rehype-code-block'
+import type { TocItem } from './types'
 
 // 创建 markdown 处理器
 export const createMarkdownProcessor = () => {
@@ -22,12 +25,16 @@ export const createMarkdownProcessor = () => {
       ignoreMissing: true,
     })
     .use(rehypeMermaidSimple) // 使用简化的 Mermaid 插件
+    .use(rehypeToc) // 标题锚点 + 目录
+    .use(rehypeCodeBlock) // 代码块语言标签 + 复制按钮
     .use(rehypeStringify, { allowDangerousHtml: true })
 }
 
 // 处理 markdown 内容
-export async function processMarkdown(content: string): Promise<string> {
+export async function processMarkdown(
+  content: string
+): Promise<{ html: string; toc: TocItem[] }> {
   const processor = createMarkdownProcessor()
   const result = await processor.process(content)
-  return result.toString()
+  return { html: result.toString(), toc: (result.data.toc as TocItem[]) ?? [] }
 }

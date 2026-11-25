@@ -1,226 +1,110 @@
-"use client"
-
-import { useState, useEffect, useRef } from "react"
-import { format } from "date-fns"
-import { zhCN } from "date-fns/locale"
 import Link from "next/link"
-import ThemeToggle from "src/components/ThemeToggle"
+import { format } from "date-fns"
+import SiteHeader from "src/components/SiteHeader"
 import Footer from "src/components/Footer"
 import { MarkdownContent } from "src/components/MarkdownContent"
 import Comments from "src/components/Comments"
-import type { Post } from "src/libs/markdown/types"
-import { CONFIG } from "../../../site.config"
+import ReadingProgress from "src/components/ReadingProgress"
+import { TocAside, TocDetails } from "src/components/TableOfContents"
+import { ArrowLeftIcon } from "src/components/icons"
+import type { Post, PostLink } from "src/libs/markdown/types"
 
 type Props = {
   post: Post
+  prev: PostLink | null // 更早的一篇
+  next: PostLink | null // 更新的一篇
 }
 
-const PostDetail: React.FC<Props> = ({ post }) => {
-  const [showTitle, setShowTitle] = useState(false)
-  const titleRef = useRef<HTMLHeadingElement>(null)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (titleRef.current) {
-        const rect = titleRef.current.getBoundingClientRect()
-        // Show title in header when original title is out of view
-        setShowTitle(rect.bottom < 100)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    handleScroll() // Check initial state
-
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  if (!post) {
-    return (
-      <div className="min-h-screen bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font font-montserrat text-base leading-[1.75] tracking-[0.6px] typo-transition">
-        {/* Top spacer to cover scroll content */}
-        <div className="fixed top-0 left-0 right-0 h-4 bg-typo-light-background dark:bg-typo-dark-background z-40"></div>
-
-        <header className="sticky top-4 bg-typo-light-background/80 dark:bg-typo-dark-background/80 backdrop-blur-[10px] z-50">
-          <div className="max-width-main mx-auto px-[8vw]">
-            <nav className="flex justify-between items-center py-6 border-b border-typo-light-hr dark:border-typo-dark-hr max-md:flex-col max-md:gap-4 max-md:py-4">
-              <Link
-                href="/"
-                className="text-2xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline typo-transition"
-              >
-                {CONFIG.blog.title}
-              </Link>
-              <div className="flex items-center gap-8 max-md:gap-6">
-                <Link
-                  href="/archives"
-                  className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
-                >
-                  归档
-                </Link>
-                <Link
-                  href="/about"
-                  className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
-                >
-                  关于
-                </Link>
-                <a
-                  href="/feed.xml"
-                  target="_blank"
-                  className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
-                >
-                  RSS
-                </a>
-                <ThemeToggle />
-              </div>
-            </nav>
-          </div>
-        </header>
-
-        <main className="max-width-main mx-auto px-[8vw] py-12">
-          <div className="text-center py-16">
-            <h1 className="text-3xl mb-4 text-typo-light-font dark:text-typo-dark-font">
-              404 - Post Not Found
-            </h1>
-            <p className="text-lg text-typo-light-font-secondary dark:text-typo-dark-font-secondary mb-8">
-              The post you&apos;re looking for doesn&apos;t exist or has been
-              removed.
-            </p>
-            <Link
-              href="/"
-              className="text-typo-light-font dark:text-typo-dark-font no-underline text-base typo-transition hover:underline"
-            >
-              ← Back to Home
-            </Link>
-          </div>
-        </main>
-
-        <Footer />
-      </div>
-    )
-  }
+export default function PostDetail({ post, prev, next }: Props) {
+  const { title, date, tags } = post.frontmatter
+  const hasToc = post.toc.length > 0
 
   return (
-    <div className="min-h-screen bg-typo-light-background dark:bg-typo-dark-background text-typo-light-font dark:text-typo-dark-font font-montserrat text-base leading-[1.75] tracking-[0.6px] typo-transition">
-      {/* Top spacer to cover scroll content */}
-      <div className="fixed top-0 left-0 right-0 h-4 bg-typo-light-background dark:bg-typo-dark-background z-40"></div>
+    <>
+      <SiteHeader />
+      <ReadingProgress />
 
-      {/* Header */}
-      <header className="sticky top-4 bg-typo-light-background/80 dark:bg-typo-dark-background/80 backdrop-blur-[10px] z-50">
-        <div className="max-width-main mx-auto px-[8vw]">
-          <nav className="flex justify-between items-center py-6 border-b border-typo-light-hr dark:border-typo-dark-hr max-md:flex-col max-md:gap-4 max-md:py-4">
-            <div className="flex items-center gap-4 flex-1 relative">
-              <Link
-                href="/"
-                className={`text-2xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline transition-all duration-300 ${
-                  showTitle
-                    ? "opacity-0 -translate-x-4 pointer-events-none"
-                    : "opacity-100 translate-x-0"
-                }`}
-              >
-                {CONFIG.blog.title}
-              </Link>
-              <Link
-                href="/"
-                className={`text-xl font-semibold text-typo-light-font dark:text-typo-dark-font no-underline absolute left-0 transition-all duration-300 max-md:text-lg max-md:max-w-[60%] max-md:truncate ${
-                  showTitle
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 -translate-x-4 pointer-events-none"
-                }`}
-              >
-                {post.frontmatter.title}
-              </Link>
+      <div className="flex justify-center gap-14 px-5 md:px-6">
+        {/* 左侧占位，让正文在宽屏上居中 */}
+        <div className="hidden w-[180px] shrink-0 xl:block" />
+
+        <article className="w-full max-w-[632px] min-w-0 pt-7 pb-24 md:pt-16">
+          <Link
+            href="/"
+            className="mb-10 hidden items-center gap-1.5 text-sm text-ink-3 transition-colors hover:text-ink md:inline-flex"
+          >
+            <ArrowLeftIcon size={16} />
+            全部文章
+          </Link>
+
+          <h1 className="mb-3.5 text-[25px] leading-[1.4] font-bold tracking-[-0.02em] md:mb-5 md:text-[34px] md:leading-[1.35]">
+            {title}
+          </h1>
+
+          <div className="flex flex-wrap gap-x-3 gap-y-1 pb-5 font-mono text-xs text-ink-3 md:gap-x-3.5 md:gap-y-1.5 md:border-b md:border-rule md:pb-8 md:text-[13px]">
+            <time dateTime={format(new Date(date), "yyyy-MM-dd")}>
+              {format(new Date(date), "yyyy-MM-dd")}
+            </time>
+            <span aria-hidden="true">·</span>
+            <span>{post.readingTime} min</span>
+            {tags.length > 0 && <span aria-hidden="true">·</span>}
+            {tags.map((tag) => (
+              <span key={tag}>#{tag}</span>
+            ))}
+          </div>
+
+          {hasToc && (
+            <div className="xl:hidden">
+              <TocDetails items={post.toc} />
             </div>
-            <div className="flex items-center gap-8 max-md:gap-6">
-              <Link
-                href="/archives"
-                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
-              >
-                归档
-              </Link>
-              <Link
-                href="/about"
-                className="text-typo-light-font-secondary dark:text-typo-dark-font-secondary no-underline text-base typo-transition hover:text-typo-light-font dark:hover:text-typo-dark-font hover:underline"
-              >
-                关于
-              </Link>
-              <ThemeToggle />
-            </div>
-          </nav>
-        </div>
-      </header>
+          )}
 
-      {/* Main Content */}
-      <main className="max-width-main mx-auto px-[8vw] py-12">
-        <article className="mx-auto">
-          {/* Article Header */}
-          <header className="mb-12">
-            <div className="flex items-center gap-2 mb-6 text-typo-light-font-extra dark:text-typo-dark-font-extra text-sm">
-              <span>
-                {format(new Date(post.frontmatter.date), "yyyy-MM-dd", {
-                  locale: zhCN,
-                })}
-              </span>
-              <span className="opacity-50">·</span>
-              <span>{post.readingTime || "5"} min read</span>
-            </div>
-
-            <h1
-              ref={titleRef}
-              className="text-[36px] font-bold m-0 mb-6 text-typo-light-font dark:text-typo-dark-font leading-[1.3] max-md:text-[28px]"
-            >
-              {post.frontmatter.title}
-            </h1>
-
-            {post.frontmatter.description && (
-              <p className="text-lg text-typo-light-font-secondary dark:text-typo-dark-font-secondary leading-relaxed m-0 mb-6 max-w-[600px]">
-                {post.frontmatter.description}
-              </p>
-            )}
-
-            {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-              <div className="flex gap-2 flex-wrap mt-6">
-                {post.frontmatter.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-xs text-typo-light-font-extra dark:text-typo-dark-font-extra bg-typo-light-list-item dark:bg-typo-dark-list-item py-1 px-3 rounded-xl before:content-['#']"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-          </header>
-
-          {/* Article Content */}
-          <div className="mb-16">
+          <div className="pt-6 md:pt-9">
             <MarkdownContent content={post.htmlContent} />
           </div>
 
-          <Comments />
-
-          {/* Article Footer */}
-          <footer className="border-t border-dashed border-typo-light-hr dark:border-typo-dark-hr pt-8 flex flex-col gap-6">
-            <div className="text-sm text-typo-light-font-extra dark:text-typo-dark-font-extra">
-              Last updated:{" "}
-              {format(
-                new Date(post.updatedTime || post.frontmatter.date),
-                "yyyy-MM-dd",
-                { locale: zhCN }
-              )}
-            </div>
-
-            <Link
-              href="/"
-              className="text-typo-light-font dark:text-typo-dark-font no-underline text-base font-medium typo-transition hover:underline hover:-translate-x-1"
+          {(prev || next) && (
+            <nav
+              aria-label="相邻文章"
+              className="mt-16 grid grid-cols-2 gap-4 border-t border-rule pt-6 md:mt-[72px] md:gap-6"
             >
-              ← Back to Home
-            </Link>
-          </footer>
+              {prev ? (
+                <Link href={`/${prev.slug}`} className="group flex flex-col gap-1.5">
+                  <span className="font-mono text-xs text-ink-3">← 上一篇</span>
+                  <span className="text-[15px] leading-normal underline-offset-4 group-hover:underline">
+                    {prev.title}
+                  </span>
+                </Link>
+              ) : (
+                <span />
+              )}
+              {next && (
+                <Link
+                  href={`/${next.slug}`}
+                  className="group flex flex-col gap-1.5 text-right"
+                >
+                  <span className="font-mono text-xs text-ink-3">下一篇 →</span>
+                  <span className="text-[15px] leading-normal underline-offset-4 group-hover:underline">
+                    {next.title}
+                  </span>
+                </Link>
+              )}
+            </nav>
+          )}
+
+          <Comments />
         </article>
-      </main>
+
+        <aside className="hidden w-[180px] shrink-0 xl:block">
+          {hasToc && (
+            <div className="sticky top-24 mt-[236px] max-h-[calc(100vh-8rem)] overflow-y-auto pb-6">
+              <TocAside items={post.toc} />
+            </div>
+          )}
+        </aside>
+      </div>
 
       <Footer />
-    </div>
+    </>
   )
 }
-
-export default PostDetail

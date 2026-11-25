@@ -5,7 +5,7 @@ import { format } from "date-fns"
 import { zhCN } from "date-fns/locale"
 import { imageProcessor } from "./imageProcessor"
 import { processMarkdown } from "./processor"
-import type { Post } from "./types"
+import type { Post, PostSummary } from "./types"
 
 const postsDirectory = path.join(process.cwd(), "content/posts")
 
@@ -68,7 +68,9 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       imageProcessor.processImages(content)
 
     // 处理 Markdown 转 HTML（包括代码高亮和 Mermaid）
-    const htmlContent = await processMarkdown(processedImageContent)
+    const { html: htmlContent, toc } = await processMarkdown(
+      processedImageContent
+    )
 
     // 获取文件统计信息
     const stats = fs.statSync(fullPath)
@@ -87,6 +89,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       },
       content,
       htmlContent,
+      toc,
       excerpt: generateExcerpt(content),
       readingTime: calculateReadingTime(content),
       createdTime: format(stats.birthtime, "yyyy-MM-dd HH:mm:ss", {
@@ -117,6 +120,24 @@ export async function getAllPosts(): Promise<Post[]> {
         new Date(a.frontmatter.date).getTime()
       )
     })
+}
+
+// 只读 frontmatter 的文章索引（不渲染正文），按日期降序，已过滤草稿
+export function getPostIndex(): PostSummary[] {
+  return getAllPostSlugs()
+    .map((slug) => {
+      const raw = fs.readFileSync(path.join(postsDirectory, `${slug}.md`), "utf8")
+      const { data } = matter(raw)
+      if (!data.title || !data.date || data.draft) return null
+      return {
+        slug,
+        title: String(data.title),
+        date: format(new Date(data.date), "yyyy-MM-dd"),
+        tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+      }
+    })
+    .filter((p): p is PostSummary => p !== null)
+    .sort((a, b) => b.date.localeCompare(a.date))
 }
 
 // 获取所有标签

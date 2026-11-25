@@ -59,15 +59,9 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
         // 配置 Mermaid
         mermaid.initialize({
           startOnLoad: false,
-          theme: "default",
-          themeVariables: {
-            primaryColor: "#0ea5e9",
-            primaryTextColor: "#fff",
-            primaryBorderColor: "#0284c7",
-            lineColor: "#5c5c5c",
-            secondaryColor: "#006100",
-            tertiaryColor: "#fff",
-          },
+          theme: document.documentElement.classList.contains("dark")
+            ? "dark"
+            : "neutral",
           securityLevel: "loose",
         })
 
@@ -127,25 +121,35 @@ export function MarkdownContent({ content }: MarkdownContentProps) {
     loadMermaid()
   }, [content])
 
+  // 代码块复制按钮（按钮由 rehype-code-block 在构建时生成）
+  useEffect(() => {
+    const root = contentRef.current
+    if (!root) return
+    const onClick = async (e: MouseEvent) => {
+      const button = (e.target as HTMLElement).closest<HTMLButtonElement>(".code-copy")
+      if (!button) return
+      const code = button.closest(".code-block")?.querySelector("pre code")
+      if (!code) return
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? "")
+        button.dataset.copied = ""
+        button.setAttribute("aria-label", "已复制")
+        window.setTimeout(() => {
+          delete button.dataset.copied
+          button.setAttribute("aria-label", "复制代码")
+        }, 1500)
+      } catch {
+        // 剪贴板不可用时静默失败
+      }
+    }
+    root.addEventListener("click", onClick)
+    return () => root.removeEventListener("click", onClick)
+  }, [])
+
   return (
     <div
       ref={contentRef}
-      className="markdown-content prose prose-lg max-w-none
-                 prose-headings:text-text-primary-light dark:prose-headings:text-text-primary-dark
-                 prose-p:text-text-primary-light dark:prose-p:text-text-primary-dark
-                 prose-a:text-primary-600 dark:prose-a:text-primary-400
-                 prose-a:no-underline hover:prose-a:underline
-                 prose-strong:text-text-primary-light dark:prose-strong:text-text-primary-dark
-                 prose-code:text-text-primary-light dark:prose-code:text-text-primary-dark
-                 prose-code:bg-gray-100 dark:prose-code:bg-gray-800
-                 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-                 prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900
-                 prose-pre:text-gray-800 dark:prose-pre:text-gray-200
-                 prose-blockquote:text-text-secondary-light dark:prose-blockquote:text-text-secondary-dark
-                 prose-blockquote:border-primary-500
-                 prose-table:text-text-primary-light dark:prose-table:text-text-primary-dark
-                 prose-th:text-text-primary-light dark:prose-th:text-text-primary-dark
-                 prose-td:text-text-primary-light dark:prose-td:text-text-primary-dark"
+      className="markdown-content"
       dangerouslySetInnerHTML={{ __html: content }}
     />
   )

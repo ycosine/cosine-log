@@ -1,70 +1,41 @@
 import "../styles/globals.css"
-import { ThemeProvider } from "./providers/ThemeProvider"
+import type { Viewport } from "next"
+import { Inter } from "next/font/google"
 import localFont from "next/font/local"
+import { ThemeProvider } from "./providers/ThemeProvider"
 
-// 配置 Montserrat 字体
-const montserrat = localFont({
-  src: [
-    {
-      path: "./fonts/Montserrat-300.ttf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Montserrat-400.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Montserrat-500.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Montserrat-600.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Montserrat-700.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "./fonts/Montserrat-800.ttf",
-      weight: "800",
-      style: "normal",
-    },
-  ],
-  variable: "--font-montserrat",
+// 拉丁字符用 Inter；中文走系统字体（苹方 / 思源黑体 / 微软雅黑），见 tailwind.config.js
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
 })
 
-// 配置 JetBrains Mono 字体
 const jetbrainsMono = localFont({
   src: [
-    {
-      path: "./fonts/JetBrainsMono-400.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "./fonts/JetBrainsMono-500.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "./fonts/JetBrainsMono-600.ttf",
-      weight: "600",
-      style: "normal",
-    },
+    { path: "./fonts/JetBrainsMono-400.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/JetBrainsMono-500.ttf", weight: "500", style: "normal" },
   ],
-  variable: "--font-jetbrains-mono",
+  variable: "--font-mono",
+  display: "swap",
 })
 
 export const metadata = {
   title: "Cosine 余弦是定理",
   description: "welcome to my blog!",
   metadataBase: new URL("https://xianjun.cc"),
+  alternates: {
+    types: { "application/rss+xml": "/feed.xml" },
+  },
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f7f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0c0d0e" },
+  ],
 }
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
@@ -72,7 +43,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${montserrat.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable}`}
     >
       <body>
         <ThemeProvider

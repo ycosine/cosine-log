@@ -10,7 +10,7 @@ export default function Comments() {
   if (!CONFIG.giscus.enable) return null
 
   return (
-    <div className="mt-10 pt-10 border-t border-typo-light-hr dark:border-typo-dark-hr">
+    <div className="mt-14">
       <Giscus
         id="comments"
         repo={CONFIG.giscus.config.repo as any}

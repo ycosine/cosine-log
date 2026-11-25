@@ -5,6 +5,9 @@ const CONFIG = {
     image: "/avatar3.svg",
     role: "前端开发",
     bio: "让万物穿过自己",
+    // 首页名字下面那段自我介绍
+    intro:
+      "前端开发。在这里写技术笔记、读书摘录，和一些没想清楚但想写下来的事。让万物穿过自己。",
     aboutBio:
       "Cosine 是一个专注于技术分享和思考的个人博客。在这里，我会分享我的技术心得、学习笔记以及对生活的感悟。", // About页面的简介
     email: "codecosine@gmail.com",

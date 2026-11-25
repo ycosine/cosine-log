@@ -1,7 +1,6 @@
-import PostList from "src/routes/Feed/PostList"
-import { getAllPosts } from "src/libs/markdown/server"
+import Home from "src/routes/Home"
+import { getPostIndex } from "src/libs/markdown/server"
 
-export default async function HomePage() {
-  const posts = await getAllPosts()
-  return <PostList posts={posts} />
+export default function HomePage() {
+  return <Home posts={getPostIndex()} />
 }

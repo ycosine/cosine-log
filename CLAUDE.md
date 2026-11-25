@@ -21,26 +21,27 @@ This is a personal blog ("Cosine 余弦是定理") built with Next.js 16 (App Ro
 ### Tech Stack
 
 - **Framework**: Next.js 16 (App Router) with TypeScript
-- **Styling**: Tailwind CSS v4 — note `src/styles/globals.css` loads `tailwind.config.js` via `@config`; the custom palette lives in that file, do not delete it
+- **Styling**: Tailwind CSS v4 — `src/styles/globals.css` loads `tailwind.config.js` via `@config`. The palette ("纯墨") is CSS variables in `globals.css` (`:root` light, `.dark` dark); `tailwind.config.js` maps them to utilities (`bg-paper`, `text-ink`, `text-ink-2/3`, `text-body`, `border-rule`, `border-rule-2`, `bg-soft`). Keep both. Fonts: Inter (next/font/google) for Latin, system CJK fonts for Chinese, local JetBrains Mono for code/meta
 - **Content**: Local Markdown files with frontmatter
-- **Markdown Processing**: unified pipeline (remark-parse → remark-gfm → remark-rehype → rehype-highlight → rehype-stringify) plus custom plugins (mermaid, Obsidian `![[]]` images, next-image)
+- **Markdown Processing**: unified pipeline (remark-parse → remark-gfm → remark-rehype → rehype-highlight → rehype-stringify) plus custom plugins (mermaid, Obsidian `![[]]` images, next-image, `rehype-toc` for heading ids + TOC, `rehype-code-block` for the language label/copy button)
 - **Comments**: Giscus (config hardcoded in `site.config.js`)
 
 ### Key Directory Structure
 
 - `content/posts/` - Markdown blog posts with frontmatter (synced from Obsidian; do not hand-edit if using `pnpm sync`, it wipes this directory)
 - `src/app/` - App Router routes: `page.tsx` (feed), `[slug]/page.tsx` (post detail), `about/`, `archives/`, `feed.xml/route.ts` (RSS), `layout.tsx`, `not-found.tsx`
-- `src/routes/` - Main UI components (Feed/PostList, Detail/PostDetail, About, Archives)
+- `src/routes/` - Page UIs (Home, Detail/PostDetail, About, Archives); all share `SiteHeader` + `Footer`
 - `src/libs/markdown/` - Markdown parsing: `server.ts` (reads `content/posts`, filters drafts), `processor.ts` (unified pipeline), `imageProcessor.ts`, `plugins/`
-- `src/components/` - Reusable UI components (MarkdownContent, Comments, Footer, ThemeToggle)
-- `src/styles/globals.css` - All global styles and the highlight.js theme (hand-written `.hljs-*` rules)
+- `src/components/` - Reusable UI: `SiteHeader`, `Logo` (cosine wordmark + wave), `icons.tsx` (1.5px line icons), `PostIndex` (year-grouped list), `TableOfContents`, `ReadingProgress`, `MarkdownContent`, `Comments`, `Footer`, `ThemeToggle`
+- `src/libs/wave.ts` - Generates the exact y = cos x polyline used by the logo; `src/app/icon.svg`, `apple-icon.png`, `favicon.ico` are the site icons
+- `src/styles/globals.css` - Palette variables, base styles, `.markdown-content` typography, and the monochrome highlight.js theme
 - `scripts/` - `sync-content.js` (Obsidian sync), `copy-assets.js` (prebuild asset copy)
 
 ### Data Flow
 
 1. Write posts in the Obsidian vault, run `pnpm sync` to copy them into `content/posts/`
 2. `src/libs/markdown/server.ts` reads and parses Markdown at build/request time (Server Components)
-3. `src/routes/` components render the feed and post detail pages
+3. List pages use `getPostIndex()` (frontmatter only); the post page uses `getPost()` (full render + TOC)
 
 ## Content Management
 
